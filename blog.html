@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -74,6 +74,11 @@
         <a href="login.html"><button class="btn-book-visit">
           Login
         </button></a>
+        <button class="mobile-nav-toggle" id="mobileNavToggle" aria-label="Toggle Navigation Menu">
+          <span class="hamburger-bar"></span>
+          <span class="hamburger-bar"></span>
+          <span class="hamburger-bar"></span>
+        </button>
       </div>
     </div>
   </header>
@@ -330,9 +335,9 @@
         <p class="section-sub-text" style="margin-bottom: 2rem;">
           Subscribe to receive monthly biomarker summaries, clinical trial updates, and dietary optimization guides curated by our medical board.
         </p>
-        <form onsubmit="event.preventDefault(); showToast('Thank you for subscribing to STACKLY Digest!');" style="display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap;">
+        <form onsubmit="event.preventDefault(); window.location.href='404.html';" style="display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap;">
           <input type="email" placeholder="Enter your email address" required style="padding: 0.9rem 1.5rem; border-radius: var(--radius-pill); border: 1px solid #cbd5e1; font-size: 1rem; width: 340px; max-width: 100%;">
-          <a href="404.html"><button type="submit" class="btn-hero-primary">Subscribe Free</button></a>
+          <button type="submit" class="btn-hero-primary">Subscribe Free</button>
         </form>
       </div>
     </div>

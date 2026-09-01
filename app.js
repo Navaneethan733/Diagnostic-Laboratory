@@ -28,6 +28,7 @@ document.addEventListener("DOMContentLoaded", () => {
   setupScrollProgress();
   setupStickyHeader();
   setupHeroSliderAutoPlay();
+  setupMobileNav();
 });
 
 // ==========================================================================
@@ -383,3 +384,124 @@ function showToast(message) {
     setTimeout(() => toast.remove(), 300);
   }, 3500);
 }
+
+// ==========================================================================
+// RESPONSIVE MOBILE NAVIGATION CONTROLLER
+// ==========================================================================
+function setupMobileNav() {
+  const headerContainer = document.querySelector(".header-container");
+  if (!headerContainer) return;
+
+  // Ensure Mobile Toggle Button Exists in Header
+  let toggleBtn = document.getElementById("mobileNavToggle");
+  if (!toggleBtn) {
+    toggleBtn = document.createElement("button");
+    toggleBtn.id = "mobileNavToggle";
+    toggleBtn.className = "mobile-nav-toggle";
+    toggleBtn.setAttribute("aria-label", "Toggle Navigation Menu");
+    toggleBtn.innerHTML = `
+      <span class="hamburger-bar"></span>
+      <span class="hamburger-bar"></span>
+      <span class="hamburger-bar"></span>
+    `;
+    const headerRight = headerContainer.querySelector(".header-right");
+    if (headerRight) {
+      headerRight.appendChild(toggleBtn);
+    } else {
+      headerContainer.appendChild(toggleBtn);
+    }
+  }
+
+  // Ensure Overlay and Drawer Exist in DOM
+  let overlay = document.getElementById("mobileNavOverlay");
+  if (!overlay) {
+    overlay = document.createElement("div");
+    overlay.id = "mobileNavOverlay";
+    overlay.className = "mobile-nav-overlay";
+    document.body.appendChild(overlay);
+  }
+
+  let drawer = document.getElementById("mobileNavDrawer");
+  if (!drawer) {
+    const rawPath = window.location.pathname.split("/").pop() || "index.html";
+    const currentPage = rawPath.toLowerCase();
+
+    drawer = document.createElement("div");
+    drawer.id = "mobileNavDrawer";
+    drawer.className = "mobile-nav-drawer";
+    drawer.innerHTML = `
+      <div class="mobile-nav-header">
+        <a href="index.html" class="logo-brand">
+          <img src="images/Logo.webp" alt="STACKLY Logo" class="brand-logo-img" style="height: 32px;">
+        </a>
+        <button class="mobile-nav-close" id="mobileNavClose" aria-label="Close Menu">✕</button>
+      </div>
+      <ul class="mobile-nav-links">
+        <li><a href="index.html" class="mobile-nav-link ${currentPage === '' || currentPage === 'index.html' ? 'active' : ''}">Home</a></li>
+        <li><a href="services.html" class="mobile-nav-link ${currentPage === 'services.html' ? 'active' : ''}">Services</a></li>
+        <li><a href="about.html" class="mobile-nav-link ${currentPage === 'about.html' ? 'active' : ''}">About Us</a></li>
+        <li><a href="blog.html" class="mobile-nav-link ${currentPage === 'blog.html' ? 'active' : ''}">Blog</a></li>
+        <li><a href="contact.html" class="mobile-nav-link ${currentPage === 'contact.html' ? 'active' : ''}">Contact Us</a></li>
+      </ul>
+      <div class="mobile-nav-footer">
+        <a href="login.html" class="btn-hero-primary mobile-nav-btn">Login to Portal</a>
+        <div class="mobile-nav-contact">
+          24/7 Priority Helpline:<br>
+          <a href="tel:+919842871840" style="color: var(--accent-cyan-btn); font-weight: 700;">+91 98428 71840</a>
+        </div>
+      </div>
+    `;
+    document.body.appendChild(drawer);
+  }
+
+  const closeBtn = document.getElementById("mobileNavClose");
+
+  function openMobileNav() {
+    if (toggleBtn) toggleBtn.classList.add("active");
+    if (drawer) drawer.classList.add("active");
+    if (overlay) overlay.classList.add("active");
+    document.body.classList.add("mobile-nav-open");
+  }
+
+  function closeMobileNav() {
+    if (toggleBtn) toggleBtn.classList.remove("active");
+    if (drawer) drawer.classList.remove("active");
+    if (overlay) overlay.classList.remove("active");
+    document.body.classList.remove("mobile-nav-open");
+  }
+
+  function toggleMobileNav() {
+    if (drawer && drawer.classList.contains("active")) {
+      closeMobileNav();
+    } else {
+      openMobileNav();
+    }
+  }
+
+  toggleBtn.addEventListener("click", toggleMobileNav);
+
+  if (closeBtn) {
+    closeBtn.addEventListener("click", closeMobileNav);
+  }
+
+  if (overlay) {
+    overlay.addEventListener("click", closeMobileNav);
+  }
+
+  drawer.querySelectorAll("a").forEach(link => {
+    link.addEventListener("click", closeMobileNav);
+  });
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && drawer && drawer.classList.contains("active")) {
+      closeMobileNav();
+    }
+  });
+
+  window.addEventListener("resize", () => {
+    if (window.innerWidth > 900 && drawer && drawer.classList.contains("active")) {
+      closeMobileNav();
+    }
+  });
+}
+

@@ -47,6 +47,60 @@
       justify-content: center;
       flex-shrink: 0;
     }
+    .contact-form-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 1fr;
+      gap: 3.5rem;
+      align-items: start;
+    }
+    .form-row-2col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+    .provider-network-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 3rem;
+      align-items: center;
+    }
+
+    @media (max-width: 900px) {
+      .contact-form-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+      .provider-network-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+      .contact-card-box {
+        padding: 2rem 1.5rem;
+      }
+      .page-hero-banner {
+        padding: 4rem 1.25rem 3rem;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .form-row-2col {
+        grid-template-columns: 1fr;
+        gap: 0.75rem;
+      }
+      .contact-card-box {
+        padding: 1.5rem 1.15rem;
+        border-radius: var(--radius-lg);
+      }
+      .contact-channel-item {
+        padding: 1.15rem;
+        gap: 1rem;
+      }
+      .contact-channel-icon {
+        width: 44px;
+        height: 44px;
+      }
+    }
+
     .toast-container {
       position: fixed;
       bottom: 2rem;
@@ -140,6 +194,11 @@
         <a href="login.html"><button class="btn-book-visit">
           Login
         </button></a>
+        <button class="mobile-nav-toggle" id="mobileNavToggle" aria-label="Toggle Navigation Menu">
+          <span class="hamburger-bar"></span>
+          <span class="hamburger-bar"></span>
+          <span class="hamburger-bar"></span>
+        </button>
       </div>
     </div>
   </header>
@@ -228,7 +287,7 @@
        ========================================================================== -->
   <section class="section-padding" style="background: #ffffff;">
     <div class="container">
-      <div style="display: grid; grid-template-columns: 1.1fr 1fr; gap: 3.5rem; align-items: start;">
+      <div class="contact-form-grid">
         
         <!-- Form -->
         <div class="contact-card-box">
@@ -241,7 +300,7 @@
               <input type="text" id="contactName" class="form-input" placeholder="e.g. Sarah Jenkins" required>
             </div>
 
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+            <div class="form-row-2col">
               <div class="form-group">
                 <label class="form-label" for="contactPhone">Phone Number</label>
                 <input type="tel" id="contactPhone" class="form-input" placeholder="+91 98428 71840" required>
@@ -252,7 +311,7 @@
               </div>
             </div>
 
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+            <div class="form-row-2col">
               <div class="form-group">
                 <label class="form-label" for="contactService">Select Service</label>
                 <select id="contactService" class="form-select">
@@ -317,7 +376,7 @@
        ========================================================================== -->
   <section class="teal-section">
     <div class="container">
-      <div style="display: grid; grid-template-columns: 1.2fr 1fr; gap: 3rem; align-items: center;">
+      <div class="provider-network-grid">
         <div>
           <span class="section-badge-pill" style="background: rgba(255,255,255,0.15); color: #ffffff;">Healthcare Provider Network</span>
           <h2 class="section-title-large" style="color: #ffffff; margin-top: 0.5rem;">Are You a Referring Doctor or Clinic?</h2>
