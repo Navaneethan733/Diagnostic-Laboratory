@@ -2162,6 +2162,21 @@ body.mobile-nav-open {
   .slider-arrow-btn {
     display: none;
   }
+  .service-featured-banner {
+    grid-template-columns: 1fr !important;
+    gap: 2rem !important;
+    padding: 2rem 1.5rem !important;
+  }
+}
+
+.service-featured-banner {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap: 3.5rem;
+  align-items: center;
+  background: #ffffff;
+  padding: 3.5rem;
+  border-radius: var(--radius-xl);
 }
 
 

@@ -133,15 +133,9 @@
           <p style="color: var(--text-body); font-size: 0.95rem;">Register in under 60 seconds to access diagnostic records.</p>
         </div>
 
-        <!-- Portal Type Tabs -->
-        <div class="portal-tab-group">
-          <button type="button" class="portal-tab-btn active" onclick="switchSignupTab(this, 'patient')">Patient / Individual</button>
-          <button type="button" class="portal-tab-btn" onclick="switchSignupTab(this, 'doctor')">Healthcare Provider</button>
-        </div>
-
         <form onsubmit="handleSignupSubmit(event)">
           <div class="form-group">
-            <label class="form-label" for="signupName" id="nameLabel">Full Legal Name</label>
+            <label class="form-label" for="signupName">Full Legal Name</label>
             <input type="text" id="signupName" class="form-input" placeholder="e.g. Sarah Jenkins" required>
           </div>
 
@@ -154,11 +148,6 @@
               <label class="form-label" for="signupEmail">Email Address</label>
               <input type="email" id="signupEmail" class="form-input" placeholder="sarah@example.com" required>
             </div>
-          </div>
-
-          <div class="form-group" id="regField" style="display: none;">
-            <label class="form-label" for="signupRegNo">Medical Council Registration / Clinic License</label>
-            <input type="text" id="signupRegNo" class="form-input" placeholder="e.g. TNMC-98421">
           </div>
 
           <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
@@ -205,27 +194,6 @@
 
   <script src="app.js"></script>
   <script>
-    let currentSignupRole = 'patient';
-
-    function switchSignupTab(btn, type) {
-      currentSignupRole = type;
-      document.querySelectorAll('.portal-tab-btn').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      const regField = document.getElementById('regField');
-      const nameLabel = document.getElementById('nameLabel');
-      const nameInput = document.getElementById('signupName');
-
-      if (type === 'doctor' || type === 'admin') {
-        regField.style.display = 'block';
-        nameLabel.innerText = 'Doctor / Clinic / Lab Staff Name';
-        nameInput.placeholder = 'e.g. Dr. Priya Nair / Central Diagnostic Hub';
-      } else {
-        regField.style.display = 'none';
-        nameLabel.innerText = 'Full Legal Name';
-        nameInput.placeholder = 'e.g. Sarah Jenkins';
-      }
-    }
-
     function handleSignupSubmit(e) {
       e.preventDefault();
       const p1 = document.getElementById('signupPassword').value;
@@ -237,20 +205,19 @@
 
       const name = document.getElementById('signupName').value.trim();
       const email = document.getElementById('signupEmail').value.trim();
-      const role = (currentSignupRole === 'doctor' || currentSignupRole === 'admin') ? 'admin' : 'patient';
-      const id = role === 'admin' ? 'LAB-' + Math.floor(10000 + Math.random() * 90000) : 'STK-' + Math.floor(10000 + Math.random() * 90000);
+      const id = 'STK-' + Math.floor(10000 + Math.random() * 90000);
 
       localStorage.setItem('stackly_auth_user', JSON.stringify({
-        role: role,
+        role: 'patient',
         name: name,
         id: id,
         raw: email || name,
         loginTime: new Date().toISOString()
       }));
 
-      showToast(`Account created for ${name}! Redirecting to dashboard...`);
+      showToast(`Account created successfully for ${name}! Redirecting to login...`);
       setTimeout(() => {
-        window.location.href = role === 'admin' ? 'admin.html' : 'user.html';
+        window.location.href = 'login.html';
       }, 1200);
     }
   </script>
