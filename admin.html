@@ -1,0 +1,3202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lab Dashboard - STACKLY Precision Diagnostics</title>
+  <meta name="description" content="Monitor the sample queue, today's bookings, analyzer status, and lab capacity across the STACKLY Central Diagnostic Hub.">
+
+  <!-- Google Fonts: Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Stylesheet -->
+  <style>
+/* ==========================================================================
+   STACKLY PRECISION DIAGNOSTICS - EXACT DESIGN SYSTEM & ANIMATIONS
+   ========================================================================== */
+
+:root {
+  /* Brand Theme Colors */
+  --primary-teal: #1b6e82;
+  --primary-teal-dark: #145565;
+  --primary-teal-light: #23859d;
+  --accent-cyan-btn: #9fe8f5;
+  --accent-cyan-hover: #82dded;
+  
+  --card-bg-light: #ebf6f8;
+  --card-bg-hover: #e0f1f5;
+  --bg-slate: #f8fafc;
+  --bg-dark-footer: #0a1926;
+  
+  --text-dark: #0f172a;
+  --text-body: #475569;
+  --text-light-teal: #607987;
+  --text-white: #ffffff;
+  
+  --font-main: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --radius-xl: 24px;
+  --radius-pill: 40px;
+  
+  --transition-fast: 0.2s ease;
+  --transition-base: 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-smooth: 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  font-family: var(--font-main);
+  background-color: #ffffff;
+  color: var(--text-dark);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: all var(--transition-fast);
+}
+
+button {
+  cursor: pointer;
+  background: none;
+  border: none;
+  font-family: inherit;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+.container {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+/* ==========================================================================
+   PAGE SCROLL PROGRESS INDICATOR
+   ========================================================================== */
+.scroll-progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #9fe8f5, #1b6e82, #23859d);
+  width: 0%;
+  z-index: 9999;
+  transition: width 0.1s ease-out;
+  box-shadow: 0 0 8px rgba(159, 232, 245, 0.8);
+}
+
+/* ==========================================================================
+   1. HERO SECTION & STICKY ANIMATED HEADER
+   ========================================================================== */
+
+.hero-wrapper {
+  position: relative;
+  min-height: 740px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+}
+
+.hero-slides-container {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.hero-slide {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center center;
+  opacity: 0;
+  transform: scale(1.08);
+  transition: opacity 1.2s cubic-bezier(0.4, 0, 0.2, 1), transform 7s cubic-bezier(0.25, 1, 0.5, 1);
+  will-change: opacity, transform;
+}
+
+.hero-slide.active {
+  opacity: 1;
+  transform: scale(1);
+  z-index: 1;
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(5, 23, 44, 0.62) 0%, rgba(8, 38, 70, 0.76) 100%);
+  z-index: 2;
+  transition: opacity 0.5s ease;
+}
+
+.hero-slider-dots {
+  display: flex;
+  gap: 0.65rem;
+  align-items: center;
+  justify-content: center;
+  margin-top: 2.5rem;
+  z-index: 15;
+  position: relative;
+}
+
+.hero-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
+}
+
+.hero-dot:hover {
+  background: rgba(255, 255, 255, 0.7);
+  transform: scale(1.15);
+}
+
+.hero-dot.active {
+  width: 34px;
+  border-radius: var(--radius-pill);
+  background: var(--accent-cyan-btn);
+  border-color: var(--accent-cyan-btn);
+  box-shadow: 0 0 14px rgba(159, 232, 245, 0.8);
+}
+
+/* Sticky Header with Smooth Blur on Scroll */
+.header-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  padding: 1.5rem 0;
+  transition: all var(--transition-base);
+}
+
+.header-nav.scrolled {
+  background: rgba(8, 38, 70, 0.92);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  padding: 0.9rem 0;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.header-container {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.logo-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  transition: transform var(--transition-fast);
+}
+
+.logo-brand:hover {
+  transform: scale(1.03);
+}
+
+.brand-logo-img {
+  height: 38px;
+  width: auto;
+  object-fit: contain;
+  filter: brightness(0) invert(1);
+  transition: transform var(--transition-fast);
+}
+
+.logo-brand:hover .brand-logo-img {
+  transform: scale(1.04);
+}
+
+.nav-menu {
+  display: flex;
+  align-items: center;
+  gap: 1.85rem;
+}
+
+.nav-item {
+  color: rgba(255, 255, 255, 0.95);
+  font-size: 0.95rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  position: relative;
+  padding: 0.2rem 0;
+}
+
+.nav-item::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--accent-cyan-btn);
+  transition: width var(--transition-fast);
+  border-radius: 2px;
+}
+
+.nav-item:hover {
+  color: var(--accent-cyan-btn);
+}
+
+.nav-item:hover::after {
+  width: 100%;
+}
+
+.nav-chevron {
+  font-size: 0.75rem;
+  opacity: 0.8;
+  transition: transform var(--transition-fast);
+}
+
+.nav-item:hover .nav-chevron {
+  transform: translateY(2px);
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.cart-icon-btn {
+  position: relative;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform var(--transition-fast);
+}
+
+.cart-icon-btn:hover {
+  transform: scale(1.12);
+}
+
+.cart-badge {
+  position: absolute;
+  top: -8px;
+  right: -10px;
+  background: #ffffff;
+  color: #000000;
+  font-size: 0.7rem;
+  font-weight: 800;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.cart-badge.bump {
+  transform: scale(1.35);
+}
+
+.btn-book-visit {
+  background-color: var(--accent-cyan-btn);
+  color: #000000;
+  padding: 0.8rem 1.8rem;
+  border-radius: var(--radius-pill);
+  font-weight: 700;
+  font-size: 0.95rem;
+  transition: all var(--transition-fast);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+}
+
+.btn-book-visit:hover {
+  background-color: var(--accent-cyan-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(159, 232, 245, 0.4);
+}
+
+/* Hero Center Content */
+.hero-center {
+  position: relative;
+  z-index: 10;
+  text-align: center;
+  max-width: 920px;
+  margin: auto;
+  padding: 8rem 1.5rem 6rem;
+}
+
+.hero-main-title {
+  color: #ffffff;
+  font-size: clamp(2.5rem, 5.5vw, 4.25rem);
+  font-weight: 800;
+  line-height: 1.12;
+  margin-bottom: 1.5rem;
+  letter-spacing: -0.02em;
+  animation: heroFadeIn 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.hero-subtitle {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 1.15rem;
+  line-height: 1.65;
+  max-width: 760px;
+  margin: 0 auto 2.5rem;
+  font-weight: 400;
+  animation: heroFadeIn 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.hero-actions-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  animation: heroFadeIn 1.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes heroFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(25px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.btn-hero-primary {
+  background-color: var(--accent-cyan-btn);
+  color: #000000;
+  padding: 0.95rem 2.2rem;
+  border-radius: var(--radius-pill);
+  font-weight: 700;
+  font-size: 1rem;
+  transition: all var(--transition-fast);
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.2);
+}
+
+.btn-hero-primary:hover {
+  background-color: var(--accent-cyan-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(159, 232, 245, 0.5);
+}
+
+.hero-link-request {
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 1.05rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all var(--transition-fast);
+}
+
+.hero-link-request svg {
+  transition: transform var(--transition-fast);
+}
+
+.hero-link-request:hover {
+  color: var(--accent-cyan-btn);
+}
+
+.hero-link-request:hover svg {
+  transform: translateX(5px);
+}
+
+/* Slider Arrows */
+.slider-arrow-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 15;
+  color: #ffffff;
+  font-size: 1.8rem;
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition-fast);
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(4px);
+  opacity: 0.85;
+}
+
+.slider-arrow-btn:hover {
+  opacity: 1;
+  background: rgba(255, 255, 255, 0.25);
+  transform: translateY(-50%) scale(1.12);
+}
+
+.slider-arrow-left {
+  left: 2rem;
+}
+
+.slider-arrow-right {
+  right: 2rem;
+}
+
+/* ==========================================================================
+   2. TEAL 3-COLUMN INFO & STATS SECTION (WITH IMAGES)
+   ========================================================================== */
+
+.teal-section {
+  background-color: var(--primary-teal);
+  color: #ffffff;
+  padding: 5rem 0 4rem;
+  position: relative;
+  z-index: 5;
+  overflow: hidden;
+}
+
+.teal-grid-3col {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  margin-bottom: 4.5rem;
+}
+
+.teal-col-card {
+  padding: 0 2.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  position: relative;
+  transition: transform var(--transition-base);
+}
+
+.teal-col-card:hover {
+  transform: translateY(-4px);
+}
+
+.teal-col-card:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 10%;
+  height: 80%;
+  width: 1px;
+  background-color: rgba(255, 255, 255, 0.22);
+}
+
+.teal-col-card:first-child {
+  padding-left: 0;
+}
+
+.teal-col-card:last-child {
+  padding-right: 0;
+}
+
+.teal-thumb-img-box {
+  width: 100%;
+  height: 180px;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  margin-bottom: 0.5rem;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.teal-thumb-img-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.teal-col-card:hover .teal-thumb-img-box img {
+  transform: scale(1.08);
+}
+
+.teal-icon-box {
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  color: #ffffff;
+  transition: transform var(--transition-fast);
+}
+
+.teal-col-card:hover .teal-icon-box {
+  transform: scale(1.1) rotate(4deg);
+}
+
+.teal-col-title {
+  font-size: 1.45rem;
+  font-weight: 700;
+  line-height: 1.25;
+  color: #ffffff;
+}
+
+.teal-col-desc {
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 0.975rem;
+  line-height: 1.6;
+}
+
+.teal-col-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 700;
+  font-size: 1rem;
+  color: #ffffff;
+  margin-top: 0.5rem;
+  transition: all var(--transition-fast);
+}
+
+.teal-col-link svg {
+  transition: transform var(--transition-fast);
+}
+
+.teal-col-link:hover {
+  color: var(--accent-cyan-btn);
+}
+
+.teal-col-link:hover svg {
+  transform: translateX(5px);
+}
+
+/* Bottom Stats Row */
+.teal-stats-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  padding-top: 2.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.stat-item-block {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+  transition: transform var(--transition-fast);
+}
+
+.stat-item-block:hover {
+  transform: scale(1.03);
+}
+
+.stat-big-num {
+  font-size: 3.5rem;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: #ffffff;
+  font-family: var(--font-main);
+  min-width: 140px;
+}
+
+.stat-text-label {
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.35;
+  color: rgba(255, 255, 255, 0.9);
+  max-width: 170px;
+}
+
+/* ==========================================================================
+   3. "FIND THE RIGHT TEST FOR YOUR NEEDS" - SERVICES GRID SECTION (WITH IMAGES)
+   ========================================================================== */
+
+.services-grid-section {
+  padding: 6.5rem 0 5.5rem;
+  background-color: #ffffff;
+}
+
+.services-layout-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+/* Title Card (Top Left) */
+.services-title-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 1rem 1rem 1rem 0;
+}
+
+.services-main-heading {
+  font-size: clamp(2.4rem, 3.8vw, 3.25rem);
+  font-weight: 800;
+  line-height: 1.15;
+  color: var(--text-dark);
+  letter-spacing: -0.03em;
+}
+
+/* Rounded Cyan/Sky Tinted Service Cards */
+.service-rounded-card {
+  background-color: var(--card-bg-light);
+  border-radius: var(--radius-xl);
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 340px;
+  transition: all var(--transition-base);
+  border: 1px solid transparent;
+  position: relative;
+  overflow: hidden;
+}
+
+.service-card-img-wrap {
+  width: 100%;
+  height: 160px;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  margin-bottom: 1.25rem;
+  box-shadow: 0 4px 15px rgba(27, 110, 130, 0.1);
+}
+
+.service-card-img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.service-rounded-card:hover .service-card-img-wrap img {
+  transform: scale(1.08);
+}
+
+.service-rounded-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(90deg, var(--primary-teal), var(--accent-cyan-btn));
+  opacity: 0;
+  transition: opacity var(--transition-fast);
+}
+
+.service-rounded-card:hover {
+  background-color: var(--card-bg-hover);
+  transform: translateY(-8px);
+  box-shadow: 0 16px 36px rgba(27, 110, 130, 0.12);
+  border-color: rgba(27, 110, 130, 0.15);
+}
+
+.service-rounded-card:hover::before {
+  opacity: 1;
+}
+
+.service-card-icon {
+  width: 44px;
+  height: 44px;
+  color: var(--primary-teal);
+  margin-bottom: 0.75rem;
+  transition: transform var(--transition-fast);
+}
+
+.service-rounded-card:hover .service-card-icon {
+  transform: scale(1.12) rotate(6deg);
+}
+
+.service-card-title {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin-bottom: 0.6rem;
+  line-height: 1.3;
+}
+
+.service-card-desc {
+  color: var(--text-body);
+  font-size: 0.925rem;
+  line-height: 1.6;
+}
+
+.service-card-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--primary-teal);
+  font-weight: 700;
+  font-size: 1rem;
+  margin-top: 1.25rem;
+  transition: all var(--transition-fast);
+}
+
+.service-card-link svg {
+  transition: transform var(--transition-fast);
+}
+
+.service-card-link:hover {
+  color: var(--primary-teal-dark);
+}
+
+.service-card-link:hover svg {
+  transform: translateX(5px);
+}
+
+/* ==========================================================================
+   SECTION 1: WHY CHOOSE STACKLY (WITH IMAGES)
+   ========================================================================== */
+.why-stackly-section {
+  padding: 6rem 0;
+  background-color: var(--bg-slate);
+}
+
+.section-head-center {
+  text-align: center;
+  max-width: 760px;
+  margin: 0 auto 3.5rem;
+}
+
+.section-badge-pill {
+  display: inline-block;
+  background: var(--card-bg-light);
+  color: var(--primary-teal);
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 0.35rem 1.1rem;
+  border-radius: var(--radius-pill);
+  margin-bottom: 0.85rem;
+}
+
+.section-title-large {
+  font-size: clamp(2rem, 3.5vw, 2.75rem);
+  font-weight: 800;
+  color: var(--text-dark);
+  letter-spacing: -0.02em;
+  margin-bottom: 1rem;
+}
+
+.section-sub-text {
+  font-size: 1.1rem;
+  color: var(--text-body);
+  line-height: 1.65;
+}
+
+.features-quad-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.75rem;
+}
+
+.feature-quad-card {
+  background: #ffffff;
+  border-radius: var(--radius-xl);
+  padding: 1.5rem;
+  border: 1px solid #e2e8f0;
+  transition: all var(--transition-base);
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.feature-quad-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 32px rgba(15, 23, 42, 0.08);
+  border-color: var(--primary-teal);
+}
+
+.feature-img-box {
+  width: 100%;
+  height: 150px;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.feature-img-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.feature-quad-card:hover .feature-img-box img {
+  transform: scale(1.1);
+}
+
+.feature-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--text-dark);
+}
+
+.feature-desc {
+  font-size: 0.9rem;
+  color: var(--text-body);
+  line-height: 1.55;
+}
+
+/* ==========================================================================
+   SECTION 2: 4-STEP DIAGNOSTIC WORKFLOW (WITH IMAGES)
+   ========================================================================== */
+.workflow-section {
+  padding: 6.5rem 0;
+  background-color: #ffffff;
+}
+
+.workflow-steps-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+  position: relative;
+}
+
+.workflow-card {
+  background: var(--card-bg-light);
+  border-radius: var(--radius-xl);
+  padding: 1.75rem;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  transition: all var(--transition-base);
+}
+
+.workflow-card:hover {
+  background: var(--card-bg-hover);
+  transform: translateY(-6px);
+  box-shadow: 0 14px 28px rgba(27, 110, 130, 0.1);
+}
+
+.workflow-img-box {
+  width: 100%;
+  height: 140px;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  margin-bottom: 0.5rem;
+}
+
+.workflow-img-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+.workflow-card:hover .workflow-img-box img {
+  transform: scale(1.08);
+}
+
+.step-num-badge {
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--primary-teal);
+  opacity: 0.5;
+  line-height: 1;
+  font-family: var(--font-mono);
+}
+
+.step-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--text-dark);
+}
+
+.step-desc {
+  font-size: 0.9rem;
+  color: var(--text-body);
+  line-height: 1.55;
+}
+
+/* ==========================================================================
+   SECTION 3: FEATURED HEALTH PACKAGES & PRICING (WITH IMAGES)
+   ========================================================================== */
+.packages-section {
+  padding: 6.5rem 0;
+  background-color: var(--bg-slate);
+}
+
+.packages-tier-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  align-items: stretch;
+}
+
+.package-card {
+  background: #ffffff;
+  border-radius: var(--radius-xl);
+  border: 1px solid #e2e8f0;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: all var(--transition-base);
+  position: relative;
+  overflow: hidden;
+}
+
+.package-card.highlighted {
+  border-color: var(--primary-teal);
+  box-shadow: 0 16px 40px rgba(27, 110, 130, 0.15);
+  transform: translateY(-8px);
+}
+
+.package-img-box {
+  width: 100%;
+  height: 170px;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  margin-bottom: 1.25rem;
+}
+
+.package-img-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+.package-card:hover .package-img-box img {
+  transform: scale(1.08);
+}
+
+.package-ribbon {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  background: var(--primary-teal);
+  color: #ffffff;
+  font-size: 0.75rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  padding: 0.35rem 0.9rem;
+  border-radius: var(--radius-pill);
+  letter-spacing: 0.05em;
+  z-index: 5;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.package-name {
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: var(--text-dark);
+  margin-bottom: 0.4rem;
+}
+
+.package-desc {
+  font-size: 0.9rem;
+  color: var(--text-body);
+  margin-bottom: 1.25rem;
+}
+
+.package-price-row {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  margin-bottom: 1.25rem;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.package-price {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: var(--text-dark);
+}
+
+.package-period {
+  color: var(--text-body);
+  font-size: 0.9rem;
+}
+
+.package-features-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  margin-bottom: 1.75rem;
+  font-size: 0.925rem;
+  color: var(--text-dark);
+}
+
+.package-features-list li {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.check-icon {
+  color: var(--primary-teal);
+  font-weight: bold;
+}
+
+/* ==========================================================================
+   SECTION 4: BOARD-CERTIFIED SPECIALISTS (WITH PORTRAITS)
+   ========================================================================== */
+.specialists-section {
+  padding: 6.5rem 0;
+  background-color: #ffffff;
+}
+
+.specialists-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+}
+
+.specialist-card {
+  background: var(--card-bg-light);
+  border-radius: var(--radius-xl);
+  padding: 2rem 1.5rem;
+  text-align: center;
+  transition: all var(--transition-base);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.specialist-card:hover {
+  background: var(--card-bg-hover);
+  transform: translateY(-6px);
+  box-shadow: 0 14px 28px rgba(27, 110, 130, 0.12);
+}
+
+.specialist-photo-wrap {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-bottom: 1.25rem;
+  border: 3px solid #ffffff;
+  box-shadow: 0 8px 20px rgba(27, 110, 130, 0.25);
+}
+
+.specialist-photo-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+.specialist-card:hover .specialist-photo-wrap img {
+  transform: scale(1.1);
+}
+
+.specialist-name {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin-bottom: 0.35rem;
+}
+
+.specialist-role {
+  font-size: 0.875rem;
+  color: var(--primary-teal);
+  font-weight: 700;
+  margin-bottom: 0.4rem;
+}
+
+.specialist-creds {
+  font-size: 0.8rem;
+  color: var(--text-body);
+  margin-bottom: 1.25rem;
+}
+
+/* ==========================================================================
+   SECTION 5: PATIENT REVIEWS (WITH AVATAR PHOTOS)
+   ========================================================================== */
+.reviews-section {
+  padding: 6rem 0;
+  background-color: var(--bg-slate);
+}
+
+.reviews-tri-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+.review-card {
+  background: #ffffff;
+  border-radius: var(--radius-xl);
+  padding: 2.25rem;
+  border: 1px solid #e2e8f0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 1.25rem;
+  transition: all var(--transition-base);
+}
+
+.review-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 14px 28px rgba(15, 23, 42, 0.08);
+  border-color: var(--primary-teal);
+}
+
+.review-stars {
+  color: #f59e0b;
+  font-size: 1.1rem;
+  letter-spacing: 2px;
+}
+
+.review-text {
+  font-size: 0.95rem;
+  color: var(--text-body);
+  line-height: 1.65;
+  font-style: italic;
+}
+
+.reviewer-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+.reviewer-avatar-photo {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.reviewer-avatar-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.reviewer-name {
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--text-dark);
+}
+
+.reviewer-sub {
+  font-size: 0.78rem;
+  color: var(--primary-teal);
+}
+
+/* ==========================================================================
+   COMPREHENSIVE FOOTER
+   ========================================================================== */
+.site-footer {
+  background-color: var(--bg-dark-footer);
+  color: #ffffff;
+  padding: 5rem 0 2.5rem;
+  position: relative;
+}
+
+.footer-top-grid {
+  display: grid;
+  grid-template-columns: 1.4fr repeat(3, 1fr);
+  gap: 3.5rem;
+  margin-bottom: 4rem;
+}
+
+.footer-brand-title {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: #ffffff;
+  margin-bottom: 1rem;
+}
+
+.footer-brand-title svg {
+  color: var(--accent-cyan-btn);
+}
+
+.footer-brand-text {
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 0.925rem;
+  line-height: 1.65;
+  max-width: 330px;
+  margin-bottom: 1.5rem;
+}
+
+.footer-accred-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.footer-pill {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: var(--accent-cyan-btn);
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 0.25rem 0.65rem;
+  border-radius: var(--radius-sm);
+}
+
+.footer-social-links {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  margin-top: 1.25rem;
+}
+
+.footer-social-btn {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition-fast);
+}
+
+.footer-social-btn:hover {
+  background: var(--accent-cyan-btn);
+  color: #000000;
+  border-color: var(--accent-cyan-btn);
+  transform: translateY(-3px);
+  box-shadow: 0 6px 16px rgba(159, 232, 245, 0.4);
+}
+
+.footer-heading {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 1.25rem;
+}
+
+.footer-links-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.footer-link-item {
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 0.9rem;
+  transition: all var(--transition-fast);
+}
+
+.footer-link-item:hover {
+  color: var(--accent-cyan-btn);
+  transform: translateX(4px);
+}
+
+.footer-contact-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+.footer-bottom-strip {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.footer-legal-links {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.footer-legal-links a:hover {
+  color: var(--accent-cyan-btn);
+}
+
+/* ==========================================================================
+   SCROLL REVEAL & SECTION ANIMATIONS
+   ========================================================================== */
+
+.reveal-on-scroll {
+  opacity: 0;
+  transform: translateY(35px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.reveal-on-scroll.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.delay-1 { transition-delay: 0.1s; }
+.delay-2 { transition-delay: 0.2s; }
+.delay-3 { transition-delay: 0.3s; }
+.delay-4 { transition-delay: 0.4s; }
+.delay-5 { transition-delay: 0.5s; }
+
+.reveal-left {
+  opacity: 0;
+  transform: translateX(-40px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal-left.revealed {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.reveal-right {
+  opacity: 0;
+  transform: translateX(40px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal-right.revealed {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* ==========================================================================
+   MODALS & INTERACTIVE POPUPS (Booking, Cart)
+   ========================================================================== */
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.7);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 1.5rem;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--transition-base);
+}
+
+.modal-overlay.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.modal-card {
+  background: #ffffff;
+  border-radius: var(--radius-xl);
+  width: 100%;
+  max-width: 580px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+  padding: 2.5rem;
+  position: relative;
+  transform: scale(0.95);
+  transition: transform var(--transition-base);
+}
+
+.modal-overlay.active .modal-card {
+  transform: scale(1);
+}
+
+.modal-close-btn {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #f1f5f9;
+  color: #64748b;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  transition: all var(--transition-fast);
+}
+
+.modal-close-btn:hover {
+  background: #fee2e2;
+  color: #ef4444;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  margin-bottom: 1.1rem;
+}
+
+.form-label {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text-dark);
+}
+
+.form-input, .form-select {
+  border: 1px solid #cbd5e1;
+  border-radius: var(--radius-md);
+  padding: 0.75rem 1rem;
+  font-size: 0.95rem;
+  color: var(--text-dark);
+  outline: none;
+  transition: border-color var(--transition-fast);
+}
+
+.form-input:focus, .form-select:focus {
+  border-color: var(--primary-teal);
+  box-shadow: 0 0 0 3px rgba(27, 110, 130, 0.15);
+}
+
+/* Cart Drawer */
+.cart-drawer-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.6);
+  backdrop-filter: blur(4px);
+  z-index: 1200;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--transition-base);
+}
+
+.cart-drawer-overlay.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.cart-drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  max-width: 420px;
+  background: #ffffff;
+  z-index: 1210;
+  transform: translateX(100%);
+  transition: transform var(--transition-base);
+  display: flex;
+  flex-direction: column;
+  box-shadow: -10px 0 30px rgba(0, 0, 0, 0.15);
+}
+
+.cart-drawer.active {
+  transform: translateX(0);
+}
+
+.cart-drawer-header {
+  padding: 1.5rem;
+  border-bottom: 1px solid #e2e8f0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.cart-items-list {
+  flex: 1;
+  overflow-y: auto;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.cart-item {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: var(--radius-md);
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cart-drawer-footer {
+  padding: 1.5rem;
+  border-top: 1px solid #e2e8f0;
+  background: #f8fafc;
+}
+
+/* Toast Notifications */
+.toast-container {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  z-index: 2000;
+}
+
+.toast {
+  background: var(--text-dark);
+  color: #ffffff;
+  border-radius: var(--radius-md);
+  padding: 1rem 1.5rem;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  animation: slideToast 0.3s ease;
+  min-width: 280px;
+}
+
+@keyframes slideToast {
+  from { transform: translateX(50px); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+/* ==========================================================================
+   RESPONSIVE MEDIA QUERIES
+   ========================================================================== */
+
+@media (max-width: 1024px) {
+  .teal-grid-3col {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+  .teal-col-card:not(:last-child)::after {
+    display: none;
+  }
+  .teal-col-card {
+    padding: 0;
+  }
+  .teal-stats-row {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  .services-layout-grid,
+  .features-quad-grid,
+  .workflow-steps-grid,
+  .packages-tier-grid,
+  .specialists-grid,
+  .reviews-tri-grid,
+  .footer-top-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* Header collapses to hamburger from here down, giving the extra
+     portal links room to breathe on tablet widths too */
+  .nav-menu,
+  .header-portal-group,
+  .header-cta-desktop {
+    display: none;
+  }
+  .mobile-menu-toggle {
+    display: flex;
+  }
+}
+
+@media (max-width: 768px) {
+  .services-layout-grid,
+  .features-quad-grid,
+  .workflow-steps-grid,
+  .packages-tier-grid,
+  .specialists-grid,
+  .reviews-tri-grid,
+  .footer-top-grid {
+    grid-template-columns: 1fr;
+  }
+  .hero-main-title {
+    font-size: 2.35rem;
+  }
+  .hero-actions-row {
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+  .slider-arrow-btn {
+    display: none;
+  }
+}
+
+/* ==========================================================================
+   ACCESSIBILITY: FOCUS STATES & REDUCED MOTION
+   ========================================================================== */
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--accent-cyan-btn);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ==========================================================================
+   HEADER PORTAL LINKS (Patient Portal / Lab Dashboard quick access)
+   ========================================================================== */
+.header-portal-group {
+  display: flex;
+  align-items: center;
+  gap: 1.35rem;
+  padding-right: 1.35rem;
+  margin-right: 0.25rem;
+  border-right: 1px solid rgba(255, 255, 255, 0.22);
+}
+
+.header-portal-link {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 0.88rem;
+  font-weight: 600;
+  white-space: nowrap;
+  position: relative;
+  padding: 0.2rem 0;
+}
+
+.header-portal-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--accent-cyan-btn);
+  transition: width var(--transition-fast);
+  border-radius: 2px;
+}
+
+.header-portal-link:hover {
+  color: var(--accent-cyan-btn);
+}
+
+.header-portal-link:hover::after {
+  width: 100%;
+}
+
+.header-portal-link.is-active {
+  color: var(--accent-cyan-btn);
+}
+
+.header-portal-link.is-active::after {
+  width: 100%;
+}
+
+.btn-header-outline {
+  display: inline-flex;
+  align-items: center;
+  color: #ffffff;
+  border: 1.5px solid rgba(255, 255, 255, 0.5);
+  padding: 0.7rem 1.5rem;
+  border-radius: var(--radius-pill);
+  font-weight: 700;
+  font-size: 0.9rem;
+  transition: all var(--transition-fast);
+}
+
+.btn-header-outline:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: #ffffff;
+}
+
+/* ==========================================================================
+   MOBILE HAMBURGER MENU (Toggle + Slide-In Panel)
+   ========================================================================== */
+.mobile-menu-toggle {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  width: 42px;
+  height: 42px;
+  flex-shrink: 0;
+}
+
+.hamburger-line {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: #ffffff;
+  border-radius: 2px;
+  transition: transform var(--transition-fast), opacity var(--transition-fast);
+}
+
+.mobile-menu-toggle[aria-expanded="true"] .hamburger-line:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.mobile-menu-toggle[aria-expanded="true"] .hamburger-line:nth-child(2) {
+  opacity: 0;
+}
+
+.mobile-menu-toggle[aria-expanded="true"] .hamburger-line:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+.mobile-nav-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(5, 12, 20, 0.65);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  z-index: 1300;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--transition-base);
+}
+
+.mobile-nav-overlay.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.mobile-nav-panel {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 84%;
+  max-width: 360px;
+  background: var(--bg-dark-footer);
+  z-index: 1310;
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem 1.5rem 2rem;
+  box-shadow: -12px 0 34px rgba(0, 0, 0, 0.3);
+  transform: translateX(100%);
+  transition: transform var(--transition-base);
+}
+
+.mobile-nav-panel.active {
+  transform: translateX(0);
+}
+
+.mobile-nav-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+  flex-shrink: 0;
+}
+
+.mobile-nav-logo {
+  height: 30px;
+  width: auto;
+  filter: brightness(0) invert(1);
+}
+
+.mobile-nav-close {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  flex-shrink: 0;
+  transition: all var(--transition-fast);
+}
+
+.mobile-nav-close:hover {
+  background: rgba(255, 255, 255, 0.18);
+}
+
+.mobile-nav-links {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  overflow-y: auto;
+  gap: 0.1rem;
+}
+
+.mobile-nav-item {
+  color: rgba(255, 255, 255, 0.92);
+  font-size: 1.05rem;
+  font-weight: 600;
+  padding: 0.9rem 0.15rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.09);
+  transition: color var(--transition-fast);
+}
+
+.mobile-nav-item:hover {
+  color: var(--accent-cyan-btn);
+}
+
+.mobile-nav-item.is-active {
+  color: var(--accent-cyan-btn);
+}
+
+.mobile-nav-divider {
+  height: 1px;
+  background: rgba(255, 255, 255, 0.14);
+  margin: 0.75rem 0;
+}
+
+.mobile-nav-section-label {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  padding: 0.5rem 0.15rem 0.35rem;
+}
+
+.mobile-nav-cta {
+  margin-top: 1.5rem;
+  background: var(--accent-cyan-btn);
+  color: #000000;
+  text-align: center;
+  padding: 0.95rem;
+  border-radius: var(--radius-pill);
+  font-weight: 700;
+  font-size: 0.98rem;
+  flex-shrink: 0;
+  transition: all var(--transition-fast);
+}
+
+.mobile-nav-cta:hover {
+  background: var(--accent-cyan-hover);
+}
+
+/* ==========================================================================
+   DASHBOARD PAGES - SHARED LAYOUT (Patient Portal / Lab Dashboard)
+   ========================================================================== */
+
+/* Header variant: dashboards have no hero image behind them, so the header
+   sits solid and in-flow (sticky) from the start instead of transparent/fixed. */
+.header-nav.dashboard-header-nav {
+  position: sticky;
+  background: rgba(8, 38, 70, 0.97);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  padding: 0.9rem 0;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.dashboard-body {
+  background-color: var(--bg-slate);
+}
+
+/* Greeting / Overview Band */
+.dash-hero-band {
+  background: linear-gradient(120deg, var(--primary-teal) 0%, var(--primary-teal-dark) 100%);
+  padding: 3.5rem 0 3rem;
+  color: #ffffff;
+}
+
+.dash-hero-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2.5rem;
+  flex-wrap: wrap;
+}
+
+.dash-hero-text {
+  flex: 1 1 380px;
+}
+
+.dash-hero-eyebrow {
+  display: inline-block;
+  background: rgba(255, 255, 255, 0.14);
+  color: var(--accent-cyan-btn);
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 0.3rem 0.9rem;
+  border-radius: var(--radius-pill);
+  margin-bottom: 0.9rem;
+}
+
+.dash-hero-greeting {
+  font-size: clamp(1.7rem, 3vw, 2.35rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.5rem;
+  line-height: 1.2;
+}
+
+.dash-hero-sub {
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 1rem;
+}
+
+.dash-hero-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  text-align: right;
+  flex-shrink: 0;
+}
+
+.dash-hero-stat .stat-big-num {
+  font-size: 3.25rem;
+  min-width: 0;
+}
+
+.dash-hero-stat .stat-text-label {
+  max-width: 200px;
+  text-align: right;
+}
+
+/* Stat Cards Row */
+.dash-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+  margin-top: -2.75rem;
+  margin-bottom: 3rem;
+  position: relative;
+  z-index: 6;
+}
+
+.dash-stat-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: var(--radius-xl);
+  padding: 1.5rem 1.65rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.06);
+  transition: all var(--transition-base);
+}
+
+.dash-stat-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 32px rgba(27, 110, 130, 0.12);
+  border-color: rgba(27, 110, 130, 0.2);
+}
+
+.dash-stat-num {
+  font-size: 2.15rem;
+  font-weight: 800;
+  color: var(--primary-teal);
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+
+.dash-stat-label {
+  font-size: 0.85rem;
+  color: var(--text-body);
+  font-weight: 600;
+}
+
+/* Two-Column Dashboard Layout */
+.dash-layout-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+  gap: 1.75rem;
+  padding-bottom: 5rem;
+  align-items: start;
+}
+
+.dash-col-main,
+.dash-col-side {
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+  min-width: 0;
+}
+
+/* Panels */
+.dash-panel {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: var(--radius-xl);
+  padding: 1.85rem 2rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.dash-panel-accent::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(90deg, var(--primary-teal), var(--accent-cyan-btn));
+}
+
+.dash-panel-soft {
+  background: var(--bg-slate);
+  border-color: transparent;
+}
+
+.dash-panel-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.35rem;
+}
+
+.dash-panel-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--text-dark);
+}
+
+.dash-panel-meta {
+  font-size: 0.85rem;
+  color: var(--text-body);
+}
+
+/* Appointment / Info Detail Rows (used inside panels) */
+.dash-detail-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.dash-detail-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.dash-detail-row:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.dash-detail-label {
+  font-size: 0.85rem;
+  color: var(--text-light-teal);
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+.dash-detail-value {
+  font-size: 0.95rem;
+  color: var(--text-dark);
+  font-weight: 600;
+  text-align: right;
+}
+
+.dash-detail-note {
+  background: var(--card-bg-light);
+  border-radius: var(--radius-md);
+  padding: 0.9rem 1.1rem;
+  font-size: 0.85rem;
+  color: var(--primary-teal-dark);
+  margin-top: 0.25rem;
+}
+
+/* Data Tables */
+.dash-table-scroll {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin: 0 -0.25rem;
+}
+
+.dash-table {
+  width: 100%;
+  min-width: 460px;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.dash-table th {
+  text-align: left;
+  color: var(--text-light-teal);
+  font-weight: 700;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 0 0.6rem 0.75rem;
+  border-bottom: 2px solid #e2e8f0;
+  white-space: nowrap;
+}
+
+.dash-table td {
+  padding: 0.95rem 0.6rem;
+  border-bottom: 1px solid #f1f5f9;
+  color: var(--text-dark);
+  vertical-align: middle;
+}
+
+.dash-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.dash-table tbody tr:hover td {
+  background: var(--bg-slate);
+}
+
+.dash-table-primary-cell {
+  font-weight: 700;
+  color: var(--text-dark);
+}
+
+.dash-table-sub-cell {
+  color: var(--text-body);
+  font-size: 0.85rem;
+}
+
+/* Status Pills */
+.status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.32rem 0.8rem;
+  border-radius: var(--radius-pill);
+  font-size: 0.76rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.status-pill::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+  flex-shrink: 0;
+}
+
+.status-positive {
+  background: #dcfce7;
+  color: #15803d;
+}
+
+.status-info {
+  background: var(--card-bg-light);
+  color: var(--primary-teal);
+}
+
+.status-warning {
+  background: #fef3c7;
+  color: #b45309;
+}
+
+.status-urgent {
+  background: #fee2e2;
+  color: #b91c1c;
+}
+
+.status-neutral {
+  background: #f1f5f9;
+  color: var(--text-light-teal);
+}
+
+/* Avatar Rows (Care Team / Staff on Duty) */
+.dash-people-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+}
+
+.dash-person-row {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+.dash-person-avatar {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  overflow: hidden;
+  flex-shrink: 0;
+  box-shadow: 0 4px 10px rgba(27, 110, 130, 0.2);
+}
+
+.dash-person-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.dash-person-name {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--text-dark);
+  line-height: 1.3;
+}
+
+.dash-person-role {
+  font-size: 0.78rem;
+  color: var(--text-body);
+}
+
+/* Equipment / Simple Status List */
+.dash-status-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+
+.dash-status-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.dash-status-name {
+  font-size: 0.88rem;
+  color: var(--text-dark);
+  font-weight: 600;
+}
+
+/* Sparkline / Trend Bars */
+.dash-sparkline-label {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 1rem;
+}
+
+.dash-sparkline-title {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--text-dark);
+}
+
+.dash-sparkline-trend {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #15803d;
+}
+
+.dash-sparkline {
+  display: flex;
+  align-items: flex-end;
+  gap: 0.65rem;
+  height: 90px;
+}
+
+.dash-sparkline-bar {
+  flex: 1;
+  min-height: 10%;
+  background: linear-gradient(180deg, var(--accent-cyan-btn), var(--primary-teal));
+  border-radius: 6px 6px 3px 3px;
+  position: relative;
+  transition: transform var(--transition-fast);
+}
+
+.dash-sparkline-bar:hover {
+  transform: scaleY(1.04);
+  transform-origin: bottom;
+}
+
+.dash-sparkline-val {
+  position: absolute;
+  top: -1.35rem;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--text-body);
+  white-space: nowrap;
+}
+
+.dash-sparkline-axis {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 0.6rem;
+  font-size: 0.72rem;
+  color: var(--text-light-teal);
+}
+
+/* Capacity / Progress Bar */
+.dash-capacity-bar {
+  width: 100%;
+  height: 10px;
+  background: #e2e8f0;
+  border-radius: var(--radius-pill);
+  overflow: hidden;
+  margin-bottom: 0.6rem;
+}
+
+.dash-capacity-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--primary-teal), var(--accent-cyan-btn));
+  border-radius: var(--radius-pill);
+}
+
+.dash-capacity-label {
+  font-size: 0.85rem;
+  color: var(--text-body);
+}
+
+/* Notifications List */
+.dash-notif-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+}
+
+.dash-notif-row {
+  display: flex;
+  gap: 0.75rem;
+  align-items: flex-start;
+}
+
+.dash-notif-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--card-bg-light);
+  color: var(--primary-teal);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.dash-notif-text {
+  font-size: 0.87rem;
+  color: var(--text-dark);
+  line-height: 1.45;
+}
+
+.dash-notif-time {
+  font-size: 0.76rem;
+  color: var(--text-light-teal);
+  margin-top: 0.15rem;
+}
+
+/* ==========================================================================
+   DASHBOARD RESPONSIVE RULES
+   ========================================================================== */
+@media (max-width: 1024px) {
+  .dash-stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+    margin-top: -2rem;
+  }
+  .dash-layout-grid {
+    grid-template-columns: 1fr;
+  }
+  .dash-hero-stat {
+    align-items: flex-start;
+    text-align: left;
+  }
+  .dash-hero-stat .stat-text-label {
+    text-align: left;
+  }
+}
+
+@media (max-width: 640px) {
+  .dash-hero-band {
+    padding: 2.75rem 0 2.5rem;
+  }
+  .dash-hero-inner {
+    gap: 1.75rem;
+  }
+  .dash-stats-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-top: -1.75rem;
+  }
+  .dash-stat-card {
+    padding: 1.15rem 1.25rem;
+  }
+  .dash-stat-num {
+    font-size: 1.75rem;
+  }
+  .dash-panel {
+    padding: 1.5rem 1.35rem;
+  }
+  .dash-hero-stat .stat-big-num {
+    font-size: 2.5rem;
+  }
+  .dash-detail-row {
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+  .dash-detail-value {
+    text-align: left;
+  }
+}
+
+@media (max-width: 420px) {
+  .dash-stats-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+  </style>
+</head>
+<body class="dashboard-body">
+
+  <!-- Top Scroll Progress Indicator -->
+  <div id="scrollProgressBar" class="scroll-progress-bar"></div>
+
+  <!-- ==========================================================================
+       HEADER NAVIGATION (Solid Dashboard Variant)
+       ========================================================================== -->
+  <header class="header-nav dashboard-header-nav" id="mainHeader">
+    <div class="header-container">
+      <a href="index.html" class="logo-brand">
+        <img src="images/Logo.webp" alt="STACKLY Logo" class="brand-logo-img">
+      </a>
+
+      <div class="header-right">
+        <a href="login.html" class="btn-header-outline" onclick="handleLogout(event)">Log Out</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="dashboard-main">
+
+    <!-- Greeting / Overview Band -->
+    <section class="dash-hero-band">
+      <div class="container dash-hero-inner">
+        <div class="dash-hero-text">
+          <span class="dash-hero-eyebrow">Lab Dashboard</span>
+          <h1 class="dash-hero-greeting" id="dashGreeting">Good morning, <span id="dashHeroUserName">Priya Nair</span></h1>
+          <p class="dash-hero-sub" id="dashHeroSub">Lab Operations Coordinator · <span id="dashHeroStaffId">Central Diagnostic Hub</span></p>
+        </div>
+        <div class="dash-hero-stat">
+          <span class="stat-big-num">14</span>
+          <span class="stat-text-label">samples awaiting analysis right now</span>
+        </div>
+      </div>
+    </section>
+
+    <div class="container">
+
+      <!-- Stat Cards -->
+      <div class="dash-stats-grid reveal-on-scroll">
+        <div class="dash-stat-card">
+          <span class="dash-stat-num counter-item" data-target="86" data-suffix="">0</span>
+          <span class="dash-stat-label">Samples Received Today</span>
+        </div>
+        <div class="dash-stat-card">
+          <span class="dash-stat-num counter-item" data-target="14" data-suffix="">0</span>
+          <span class="dash-stat-label">Awaiting QC Review</span>
+        </div>
+        <div class="dash-stat-card">
+          <span class="dash-stat-num counter-item" data-target="5.4" data-suffix=" hrs">0</span>
+          <span class="dash-stat-label">Avg. Turnaround Time</span>
+        </div>
+        <div class="dash-stat-card">
+          <span class="dash-stat-num counter-item" data-target="61" data-suffix="">0</span>
+          <span class="dash-stat-label">Results Delivered Today</span>
+        </div>
+      </div>
+
+      <!-- Two-Column Layout -->
+      <div class="dash-layout-grid">
+
+        <!-- MAIN COLUMN -->
+        <div class="dash-col-main">
+
+          <!-- Sample Queue -->
+          <div class="dash-panel dash-panel-accent reveal-on-scroll">
+            <div class="dash-panel-head">
+              <h2 class="dash-panel-title">Sample Queue</h2>
+              <span class="dash-panel-meta">Updated live</span>
+            </div>
+            <div class="dash-table-scroll">
+              <table class="dash-table">
+                <thead>
+                  <tr>
+                    <th>Sample ID</th>
+                    <th>Test</th>
+                    <th>Priority</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="dash-table-primary-cell">STK-88213</td>
+                    <td class="dash-table-sub-cell">Lipid Profile &amp; Cholesterol</td>
+                    <td><span class="status-pill status-neutral">Routine</span></td>
+                    <td><span class="status-pill status-info">In Analysis</span></td>
+                  </tr>
+                  <tr>
+                    <td class="dash-table-primary-cell">STK-88214</td>
+                    <td class="dash-table-sub-cell">Specialized Genetic Panel</td>
+                    <td><span class="status-pill status-urgent">STAT</span></td>
+                    <td><span class="status-pill status-warning">QC Review</span></td>
+                  </tr>
+                  <tr>
+                    <td class="dash-table-primary-cell">STK-88215</td>
+                    <td class="dash-table-sub-cell">Complete Blood Count (CBC)</td>
+                    <td><span class="status-pill status-neutral">Routine</span></td>
+                    <td><span class="status-pill status-neutral">Received</span></td>
+                  </tr>
+                  <tr>
+                    <td class="dash-table-primary-cell">STK-88216</td>
+                    <td class="dash-table-sub-cell">Thyroid Ultra-TSH Profile</td>
+                    <td><span class="status-pill status-neutral">Routine</span></td>
+                    <td><span class="status-pill status-positive">Completed</span></td>
+                  </tr>
+                  <tr>
+                    <td class="dash-table-primary-cell">STK-88217</td>
+                    <td class="dash-table-sub-cell">COVID19 PCR Panel</td>
+                    <td><span class="status-pill status-urgent">STAT</span></td>
+                    <td><span class="status-pill status-info">In Analysis</span></td>
+                  </tr>
+                  <tr>
+                    <td class="dash-table-primary-cell">STK-88218</td>
+                    <td class="dash-table-sub-cell">Hormone Insights Panel</td>
+                    <td><span class="status-pill status-neutral">Routine</span></td>
+                    <td><span class="status-pill status-neutral">Received</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Today's Bookings -->
+          <div class="dash-panel dash-panel-accent reveal-on-scroll delay-1">
+            <div class="dash-panel-head">
+              <h2 class="dash-panel-title">Today's Bookings</h2>
+              <span class="dash-panel-meta">4 scheduled</span>
+            </div>
+            <div class="dash-table-scroll">
+              <table class="dash-table">
+                <thead>
+                  <tr>
+                    <th>Patient</th>
+                    <th>Time</th>
+                    <th>Service</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="dash-table-primary-cell">Jonathan Taylor</td>
+                    <td class="dash-table-sub-cell">10:00 AM</td>
+                    <td class="dash-table-sub-cell">Executive Package</td>
+                  </tr>
+                  <tr>
+                    <td class="dash-table-primary-cell">Claire Washington</td>
+                    <td class="dash-table-sub-cell">11:30 AM</td>
+                    <td class="dash-table-sub-cell">Home Visit Collection</td>
+                  </tr>
+                  <tr>
+                    <td class="dash-table-primary-cell">Naomi Chen</td>
+                    <td class="dash-table-sub-cell">1:15 PM</td>
+                    <td class="dash-table-sub-cell">Specialized Genetic Panel</td>
+                  </tr>
+                  <tr>
+                    <td class="dash-table-primary-cell">Diego Fernandes</td>
+                    <td class="dash-table-sub-cell">3:00 PM</td>
+                    <td class="dash-table-sub-cell">Essential Wellness Package</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- SIDE COLUMN -->
+        <div class="dash-col-side">
+
+          <!-- Equipment & Analyzer Status -->
+          <div class="dash-panel dash-panel-soft reveal-on-scroll delay-1">
+            <div class="dash-panel-head">
+              <h2 class="dash-panel-title">Analyzer Status</h2>
+            </div>
+            <div class="dash-status-list">
+              <div class="dash-status-row">
+                <span class="dash-status-name">Hematology Analyzer A1</span>
+                <span class="status-pill status-positive">Operational</span>
+              </div>
+              <div class="dash-status-row">
+                <span class="dash-status-name">Chemistry Analyzer B2</span>
+                <span class="status-pill status-positive">Operational</span>
+              </div>
+              <div class="dash-status-row">
+                <span class="dash-status-name">PCR Station C1</span>
+                <span class="status-pill status-warning">Maintenance Due</span>
+              </div>
+              <div class="dash-status-row">
+                <span class="dash-status-name">Cold-Chain Storage Unit</span>
+                <span class="status-pill status-positive">Operational</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Staff on Duty -->
+          <div class="dash-panel reveal-on-scroll delay-2">
+            <div class="dash-panel-head">
+              <h2 class="dash-panel-title">Staff on Duty</h2>
+            </div>
+            <div class="dash-people-list">
+              <div class="dash-person-row">
+                <div class="dash-person-avatar">
+                  <img src="images/dr_alistair_vance.WEBP" alt="Dr. Alistair Vance" loading="lazy">
+                </div>
+                <div>
+                  <div class="dash-person-name">Dr. Alistair Vance, PhD</div>
+                  <div class="dash-person-role">Head of Molecular Genetics</div>
+                </div>
+              </div>
+              <div class="dash-person-row">
+                <div class="dash-person-avatar">
+                  <img src="images/dr_miriam_patel.WEBP" alt="Dr. Miriam Patel" loading="lazy">
+                </div>
+                <div>
+                  <div class="dash-person-name">Dr. Miriam Patel, MD</div>
+                  <div class="dash-person-role">Endocrinology &amp; Biochemistry</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Lab Capacity -->
+          <div class="dash-panel dash-panel-soft reveal-on-scroll delay-3">
+            <div class="dash-panel-head">
+              <h2 class="dash-panel-title">Lab Capacity</h2>
+            </div>
+            <div class="dash-capacity-bar">
+              <div class="dash-capacity-fill" style="width: 72%;"></div>
+            </div>
+            <p class="dash-capacity-label">72% of daily processing capacity used</p>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- ==========================================================================
+       COMPREHENSIVE MODERN FOOTER
+       ========================================================================== -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-top-grid">
+        <div>
+          <div class="footer-brand-title">
+            <img src="images/Logo.webp" alt="STACKLY Logo" class="brand-logo-img">
+          </div>
+          <p class="footer-brand-text">
+            Precision clinical diagnostics, high-throughput pathology, and molecular genomics delivering certified accuracy for clinicians and patients.
+          </p>
+          <div class="footer-accred-badges">
+            <span class="footer-pill">CAP Accredited</span>
+            <span class="footer-pill">ISO 15189:2022</span>
+            <span class="footer-pill">HIPAA Compliant</span>
+          </div>
+          <div class="footer-social-links">
+            <a href="404.html" class="footer-social-btn" aria-label="Facebook" title="Facebook">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+              </svg>
+            </a>
+            <a href="404.html" class="footer-social-btn" aria-label="Twitter" title="Twitter / X">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 4l11.733 16h4.267l-11.733 -16z"></path>
+                <path d="M4 20l6.768 -6.768m2.46 -2.46l6.772 -6.772"></path>
+              </svg>
+            </a>
+            <a href="404.html" class="footer-social-btn" aria-label="LinkedIn" title="LinkedIn">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                <rect x="2" y="9" width="4" height="12"></rect>
+                <circle cx="4" cy="4" r="2"></circle>
+              </svg>
+            </a>
+            <a href="404.html" class="footer-social-btn" aria-label="Instagram" title="Instagram">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+              </svg>
+            </a>
+            <a href="404.html" class="footer-social-btn" aria-label="YouTube" title="YouTube">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"></path>
+                <polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <div>
+          <h4 class="footer-heading">Diagnostic Services</h4>
+          <ul class="footer-links-list">
+            <li><a href="404.html" class="footer-link-item">General Diagnostic Testing</a></li>
+            <li><a href="404.html" class="footer-link-item">Specialized Genetic Testing</a></li>
+            <li><a href="404.html" class="footer-link-item">Hormone Insights Testing</a></li>
+            <li><a href="404.html" class="footer-link-item">Naturopathic Lab Testing</a></li>
+            <li><a href="404.html" class="footer-link-item">COVID19 Testing Solutions</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-heading">Patient Care</h4>
+          <ul class="footer-links-list">
+            <li><a href="404.html" class="footer-link-item">Book Home Collection</a></li>
+            <li><a href="404.html" class="footer-link-item">Health Packages &amp; Pricing</a></li>
+            <li><a href="404.html" class="footer-link-item">Consult Pathologists</a></li>
+            <li><a href="404.html" class="footer-link-item">Doctor Registration Portal</a></li>
+            <li><a href="404.html" class="footer-link-item">Fasting Guidelines</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-heading">Central Diagnostic Hub</h4>
+          <div class="footer-contact-info">
+            <p>Salem, Tamil</p>
+            <p>24/7 Helpline: +1 (800) 586-4621</p>
+            <p>support@stacklydiagnostics.com</p>
+            <p>Open 24/7 for Emergency Diagnostics</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom-strip">
+        <div>© 2026 STACKLY Precision Diagnostics Inc. All rights reserved.</div>
+        <div class="footer-legal-links">
+          <a href="404.html">Privacy Policy</a>
+          <a href="404.html">Terms of Service</a>
+          <a href="404.html">Security &amp; HIPAA</a>
+          <a href="404.html">Quality Charter</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Toast Notification Container -->
+  <div id="toastContainer" class="toast-container"></div>
+
+  <!-- Core JavaScript -->
+  <script>
+/**
+ * CLINICALLAB - APPLICATION LOGIC & SCROLL ANIMATIONS
+ */
+
+const heroSlides = [
+  {
+    title: "Clear and Insightful<br>Testing Results!",
+    subtitle: "We continually leverage our medical expertise to develop top-tier testing services while investing in cutting-edge technology to revolutionize healthcare delivery."
+  },
+  {
+    title: "Precision Diagnostics &<br>Molecular Genetics",
+    subtitle: "Empowering clinicians and patients with high-throughput laboratory automation and comprehensive cellular insights."
+  },
+  {
+    title: "Compassionate Care,<br>Accurate Answers",
+    subtitle: "From routine health screenings to advanced biomarker analysis, we ensure reliable diagnostics for your peace of mind."
+  }
+];
+
+let currentSlideIdx = 0;
+let cartCount = 0;
+let heroAutoSlideInterval = null;
+
+document.addEventListener("DOMContentLoaded", () => {
+  setupUserProfile();
+  setupCartEvents();
+  setupScrollAnimations();
+  setupScrollProgress();
+  setupStickyHeader();
+  setupHeroSliderAutoPlay();
+  setupMobileMenu();
+});
+
+// ==========================================================================
+// SCROLL PROGRESS BAR & STICKY HEADER
+// ==========================================================================
+function setupScrollProgress() {
+  const progressBar = document.getElementById("scrollProgressBar");
+  if (!progressBar) return;
+
+  window.addEventListener("scroll", () => {
+    const winScroll = document.documentElement.scrollTop || document.body.scrollTop;
+    const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    const scrolled = (winScroll / height) * 100;
+    progressBar.style.width = `${scrolled}%`;
+  }, { passive: true });
+}
+
+function setupStickyHeader() {
+  const header = document.getElementById("mainHeader");
+  if (!header) return;
+
+  window.addEventListener("scroll", () => {
+    if (window.scrollY > 40) {
+      header.classList.add("scrolled");
+    } else {
+      header.classList.remove("scrolled");
+    }
+  }, { passive: true });
+}
+
+// ==========================================================================
+// MOBILE HAMBURGER MENU (Slide-In Panel)
+// ==========================================================================
+function setupMobileMenu() {
+  const toggle = document.getElementById("mobileMenuToggle");
+  const panel = document.getElementById("mobileNavPanel");
+  const overlay = document.getElementById("mobileNavOverlay");
+  const closeBtn = document.getElementById("mobileNavClose");
+
+  if (!toggle || !panel || !overlay) return;
+
+  function openMobileMenu() {
+    panel.classList.add("active");
+    overlay.classList.add("active");
+    toggle.setAttribute("aria-expanded", "true");
+    document.body.style.overflow = "hidden";
+  }
+
+  function closeMobileMenu() {
+    panel.classList.remove("active");
+    overlay.classList.remove("active");
+    toggle.setAttribute("aria-expanded", "false");
+    document.body.style.overflow = "";
+  }
+
+  toggle.addEventListener("click", () => {
+    const isOpen = toggle.getAttribute("aria-expanded") === "true";
+    if (isOpen) {
+      closeMobileMenu();
+    } else {
+      openMobileMenu();
+    }
+  });
+
+  overlay.addEventListener("click", closeMobileMenu);
+  if (closeBtn) closeBtn.addEventListener("click", closeMobileMenu);
+
+  // Close whenever a link inside the panel is used
+  panel.querySelectorAll("a").forEach(link => {
+    link.addEventListener("click", closeMobileMenu);
+  });
+
+  // Close on Escape key
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && panel.classList.contains("active")) {
+      closeMobileMenu();
+    }
+  });
+
+  // Close automatically if the viewport is resized back to desktop
+  window.addEventListener("resize", () => {
+    if (window.innerWidth > 1024 && panel.classList.contains("active")) {
+      closeMobileMenu();
+    }
+  });
+}
+
+// ==========================================================================
+// INTERSECTION OBSERVER SCROLL REVEAL ANIMATIONS & STAT COUNTERS
+// ==========================================================================
+function setupScrollAnimations() {
+  const revealElements = document.querySelectorAll(".reveal-on-scroll, .reveal-left, .reveal-right, .reveal-scale");
+
+  const observerOptions = {
+    root: null,
+    rootMargin: "0px 0px -60px 0px",
+    threshold: 0.15
+  };
+
+  const revealObserver = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("revealed");
+        
+        // If this element contains stat counters, trigger animation
+        const counters = entry.target.querySelectorAll(".counter-item");
+        if (counters.length > 0) {
+          counters.forEach(counter => animateCounter(counter));
+        } else if (entry.target.classList.contains("counter-item")) {
+          animateCounter(entry.target);
+        }
+
+        observer.unobserve(entry.target);
+      }
+    });
+  }, observerOptions);
+
+  revealElements.forEach(el => revealObserver.observe(el));
+}
+
+// Smooth Number Counter Count-Up
+function animateCounter(counterEl) {
+  if (counterEl.dataset.animated === "true") return;
+  counterEl.dataset.animated = "true";
+
+  const targetValue = parseFloat(counterEl.dataset.target);
+  const suffix = counterEl.dataset.suffix || "";
+  const duration = 1800; // ms
+  const startTime = performance.now();
+
+  function updateCount(currentTime) {
+    const elapsed = currentTime - startTime;
+    const progress = Math.min(elapsed / duration, 1);
+
+    // Ease-out cubic formula
+    const easeOutProgress = 1 - Math.pow(1 - progress, 3);
+    const currentValue = targetValue * easeOutProgress;
+
+    if (targetValue % 1 !== 0) {
+      counterEl.innerText = `${currentValue.toFixed(1)}${suffix}`;
+    } else {
+      counterEl.innerText = `${Math.floor(currentValue)}${suffix}`;
+    }
+
+    if (progress < 1) {
+      requestAnimationFrame(updateCount);
+    } else {
+      counterEl.innerText = `${targetValue}${suffix}`;
+    }
+  }
+
+  requestAnimationFrame(updateCount);
+}
+
+// ==========================================================================
+// HERO SLIDER CONTROLLER (SLIDE IMAGE ANIMATION & AUTO-CAROUSEL)
+// ==========================================================================
+function updateHeroSlideUi(idx) {
+  currentSlideIdx = idx;
+
+  // 1. Update Slide Background Image Animation
+  const slides = document.querySelectorAll(".hero-slide");
+  slides.forEach((slide, index) => {
+    if (index === currentSlideIdx) {
+      slide.classList.add("active");
+    } else {
+      slide.classList.remove("active");
+    }
+  });
+
+  // 2. Update Pagination Dots
+  const dots = document.querySelectorAll(".hero-dot");
+  dots.forEach((dot, index) => {
+    if (index === currentSlideIdx) {
+      dot.classList.add("active");
+    } else {
+      dot.classList.remove("active");
+    }
+  });
+
+  // 3. Update Text Content with Staggered Entrance
+  const slide = heroSlides[currentSlideIdx];
+  const titleEl = document.querySelector(".hero-main-title");
+  const subEl = document.querySelector(".hero-subtitle");
+
+  if (titleEl && subEl) {
+    titleEl.style.opacity = '0';
+    subEl.style.opacity = '0';
+    titleEl.style.transform = 'translateY(15px)';
+    subEl.style.transform = 'translateY(15px)';
+    titleEl.style.transition = 'all 0.35s ease';
+    subEl.style.transition = 'all 0.35s ease';
+
+    setTimeout(() => {
+      titleEl.innerHTML = slide.title;
+      subEl.innerHTML = slide.subtitle;
+      titleEl.style.opacity = '1';
+      subEl.style.opacity = '1';
+      titleEl.style.transform = 'translateY(0)';
+      subEl.style.transform = 'translateY(0)';
+    }, 350);
+  }
+}
+
+function slideHero(direction) {
+  resetHeroAutoSlide();
+  if (direction === 'next') {
+    const nextIdx = (currentSlideIdx + 1) % heroSlides.length;
+    updateHeroSlideUi(nextIdx);
+  } else {
+    const prevIdx = (currentSlideIdx - 1 + heroSlides.length) % heroSlides.length;
+    updateHeroSlideUi(prevIdx);
+  }
+}
+
+function goToHeroSlide(idx) {
+  resetHeroAutoSlide();
+  updateHeroSlideUi(idx);
+}
+
+function setupHeroSliderAutoPlay() {
+  // Pages with no hero slider (e.g. the dashboards) shouldn't run this at all
+  const heroWrapper = document.getElementById("heroSection");
+  if (!heroWrapper) return;
+
+  heroAutoSlideInterval = setInterval(() => {
+    const nextIdx = (currentSlideIdx + 1) % heroSlides.length;
+    updateHeroSlideUi(nextIdx);
+  }, 5000);
+
+  heroWrapper.addEventListener("mouseenter", () => {
+    clearInterval(heroAutoSlideInterval);
+  });
+  heroWrapper.addEventListener("mouseleave", () => {
+    resetHeroAutoSlide();
+  });
+}
+
+function resetHeroAutoSlide() {
+  clearInterval(heroAutoSlideInterval);
+  heroAutoSlideInterval = setInterval(() => {
+    const nextIdx = (currentSlideIdx + 1) % heroSlides.length;
+    updateHeroSlideUi(nextIdx);
+  }, 5000);
+}
+
+// ==========================================================================
+// MODAL CONTROLLERS & CART MANAGEMENT
+// ==========================================================================
+function openBookingModal(serviceName = "General Diagnostic Testing") {
+  const modal = document.getElementById("bookingModal");
+  const selectEl = document.getElementById("bookingService");
+  if (selectEl && serviceName) {
+    selectEl.value = serviceName;
+  }
+  if (modal) modal.classList.add("active");
+}
+
+function closeBookingModal() {
+  const modal = document.getElementById("bookingModal");
+  if (modal) modal.classList.remove("active");
+}
+
+function openRequestTestModal(serviceName = "General Testing") {
+  openBookingModal(serviceName);
+}
+
+function openProviderModal() {
+  showToast("Healthcare Provider Portal registration opened.");
+  openBookingModal("Healthcare Provider Registration");
+}
+
+function openTestModal(serviceName) {
+  openBookingModal(serviceName);
+}
+
+function handleBookingSubmit(e) {
+  e.preventDefault();
+  const name = document.getElementById("bookingPatientName").value;
+  const service = document.getElementById("bookingService").value;
+  
+  closeBookingModal();
+  showToast(`Appointment confirmed for ${name} (${service})!`);
+  
+  cartCount++;
+  updateCartBadge();
+}
+
+// Cart Drawer
+function setupCartEvents() {
+  const trigger = document.getElementById("cartTriggerBtn");
+  if (trigger) {
+    trigger.addEventListener("click", () => {
+      const drawer = document.getElementById("cartDrawer");
+      const overlay = document.getElementById("cartDrawerOverlay");
+      if (drawer && overlay) {
+        drawer.classList.add("active");
+        overlay.classList.add("active");
+      }
+    });
+  }
+}
+
+function closeCartDrawer() {
+  const drawer = document.getElementById("cartDrawer");
+  const overlay = document.getElementById("cartDrawerOverlay");
+  if (drawer && overlay) {
+    drawer.classList.remove("active");
+    overlay.classList.remove("active");
+  }
+}
+
+function updateCartBadge() {
+  const badge = document.getElementById("cartBadgeCount");
+  if (badge) {
+    badge.innerText = cartCount;
+    badge.classList.add("bump");
+    setTimeout(() => badge.classList.remove("bump"), 300);
+  }
+}
+
+// Toast Notifications
+function showToast(message) {
+  const container = document.getElementById("toastContainer");
+  if (!container) return;
+
+  const toast = document.createElement("div");
+  toast.className = "toast";
+  toast.innerHTML = `<span>✓</span> <div>${message}</div>`;
+  container.appendChild(toast);
+
+  setTimeout(() => {
+    toast.style.opacity = "0";
+    toast.style.transform = "translateX(50px)";
+    toast.style.transition = "all 0.3s ease";
+    setTimeout(() => toast.remove(), 300);
+  }, 3500);
+}
+
+// User Profile & Logout Management
+function setupUserProfile() {
+  const storedUser = localStorage.getItem('stackly_auth_user');
+  if (storedUser) {
+    try {
+      const user = JSON.parse(storedUser);
+      const userNameEl = document.getElementById('dashHeroUserName');
+      const staffIdEl = document.getElementById('dashHeroStaffId');
+      const greetingEl = document.getElementById('dashGreeting');
+
+      // Calculate time-of-day greeting
+      const hour = new Date().getHours();
+      let timeGreeting = "Good morning";
+      if (hour >= 12 && hour < 17) {
+        timeGreeting = "Good afternoon";
+      } else if (hour >= 17) {
+        timeGreeting = "Good evening";
+      }
+
+      if (user.name && userNameEl) {
+        userNameEl.textContent = user.name;
+      }
+      if (user.id && staffIdEl) {
+        staffIdEl.textContent = `Staff ID: ${user.id} · Central Diagnostic Hub`;
+      }
+      if (greetingEl && userNameEl) {
+        greetingEl.innerHTML = `${timeGreeting}, <span id="dashHeroUserName">${user.name || 'Priya Nair'}</span>`;
+      }
+    } catch (err) {
+      console.error("Error loading staff profile", err);
+    }
+  }
+}
+
+function handleLogout(e) {
+  if (e) e.preventDefault();
+  localStorage.removeItem('stackly_auth_user');
+  window.location.href = 'login.html';
+}
+
+  </script>
+</body>
+</html>

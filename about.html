@@ -1,0 +1,457 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Us | STACKLY Precision Diagnostics</title>
+  <meta name="description" content="Learn about STACKLY Precision Diagnostics, our medical mission, CAP/ISO certified robotic laboratory infrastructure, clinical leadership, and commitment to healthcare excellence.">
+  
+  <!-- Google Fonts: Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Ultra-Aesthetic Clinical Preloader -->
+  <div id="stacklyPreloader" class="preloader-overlay">
+    <div class="preloader-glow-orb preloader-glow-orb-1"></div>
+    <div class="preloader-glow-orb preloader-glow-orb-2"></div>
+    
+    <div class="preloader-content">
+      <div class="preloader-hero-emblem">
+        <div class="preloader-aura"></div>
+        <div class="preloader-orbit-ring preloader-orbit-ring-1"></div>
+        <div class="preloader-orbit-ring preloader-orbit-ring-2"></div>
+        <div class="preloader-core-glass">
+          <img src="images/Logo.webp" alt="STACKLY" class="preloader-logo-img">
+        </div>
+      </div>
+
+      <div class="preloader-tag">STACKLY • PRECISION LABS</div>
+      
+      <div class="preloader-big-number">
+        <span id="preloaderNum">00</span>
+        <span class="preloader-unit">%</span>
+      </div>
+      
+      <div class="preloader-progress-box">
+        <div class="preloader-progress-track">
+          <div id="preloaderProgressBar" class="preloader-progress-fill"></div>
+        </div>
+        <div class="preloader-status-ticker">
+          <span class="preloader-live-indicator"></span>
+          <span id="preloaderStatusText">Calibrating Optical Systems</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Top Scroll Progress Indicator -->
+  <div id="scrollProgressBar" class="scroll-progress-bar"></div>
+
+  <!-- ==========================================================================
+       HEADER NAVIGATION
+       ========================================================================== -->
+  <header class="header-nav scrolled" id="mainHeader">
+    <div class="header-container">
+      <a href="index.html" class="logo-brand">
+        <img src="images/Logo.webp" alt="STACKLY Logo" class="brand-logo-img">
+      </a>
+
+      <nav class="nav-menu">
+        <a href="index.html" class="nav-item">Home</a>
+        <a href="services.html" class="nav-item">Services</a>          
+        <a href="about.html" class="nav-item active" style="color: var(--accent-cyan-btn);">About Us</a>
+        <a href="blog.html" class="nav-item">Blog</a>
+        <a href="contact.html" class="nav-item">Contact Us</a>
+      </nav>
+
+      <div class="header-right">
+        <a href="login.html"><button class="btn-book-visit">
+          Login
+        </button></a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ==========================================================================
+       SECTION 1: ABOUT HERO BANNER
+       ========================================================================== -->
+  <section class="page-hero-banner" style="background: linear-gradient(180deg, rgba(8, 38, 70, 0.9) 0%, rgba(5, 23, 44, 0.95) 100%), url('images/hero-slide-2.WEBP') center/cover no-repeat;">
+    <div class="container text-center">
+      <span class="section-badge-pill" style="background: rgba(159, 232, 245, 0.15); color: var(--accent-cyan-btn);">About STACKLY</span>
+      <h1 class="hero-main-title" style="font-size: clamp(2.4rem, 4vw, 3.5rem); margin-bottom: 1.25rem;">
+        Pioneering Next-Generation<br>Clinical Pathology & Diagnostics
+      </h1>
+      <p class="hero-subtitle" style="max-width: 720px; margin: 0 auto 2rem;">
+        Founded on the vision of zero-error diagnostics, STACKLY merges artificial intelligence, robotic specimen tracks, and certified pathology expertise to elevate medical outcomes.
+      </p>
+      <div style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;">
+        <a href="404.html" class="btn-hero-primary">Explore Our Testing Services</a>
+        <a href="404.html" class="btn-book-visit" style="border: 1px solid rgba(255,255,255,0.4);">Visit Our Central Lab</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       SECTION 2: MISSION, VISION & CORE VALUES
+       ========================================================================== -->
+  <section class="section-padding bg-slate">
+    <div class="container">
+      <div class="section-head-center reveal-on-scroll">
+        <span class="section-badge-pill">Foundational Principles</span>
+        <h2 class="section-title-large">Driven by Accuracy, Speed & Compassion</h2>
+        <p class="section-sub-text">
+          Every specimen entrusted to STACKLY represents a human life requiring precise, rapid, and transparent answers.
+        </p>
+      </div>
+
+      <div class="teal-grid-3col" style="gap: 2rem;">
+        <div class="service-rounded-card reveal-on-scroll delay-1" style="background: #ffffff; padding: 2.5rem 2rem;">
+          <div class="service-card-icon" style="background: var(--card-bg-light); color: var(--primary-teal);">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"></circle>
+              <line x1="12" y1="8" x2="12" y2="12"></line>
+              <line x1="12" y1="16" x2="12.01" y2="16"></line>
+            </svg>
+          </div>
+          <h3 class="service-card-title">Our Mission</h3>
+          <p class="service-card-desc">
+            To provide uncompromising diagnostic accuracy with rapid turnaround times, empowering physicians to prescribe the most effective therapies promptly.
+          </p>
+        </div>
+
+        <div class="service-rounded-card reveal-on-scroll delay-2" style="background: #ffffff; padding: 2.5rem 2rem;">
+          <div class="service-card-icon" style="background: var(--card-bg-light); color: var(--primary-teal);">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M2 12h20"></path>
+              <path d="M20 12l-6-6"></path>
+              <path d="M20 12l-6 6"></path>
+            </svg>
+          </div>
+          <h3 class="service-card-title">Our Vision</h3>
+          <p class="service-card-desc">
+            To become South Asia's benchmark laboratory network for genomic medicine, automated biochemistry, and digital biomarker health monitoring.
+          </p>
+        </div>
+
+        <div class="service-rounded-card reveal-on-scroll delay-3" style="background: #ffffff; padding: 2.5rem 2rem;">
+          <div class="service-card-icon" style="background: var(--card-bg-light); color: var(--primary-teal);">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"></path>
+            </svg>
+          </div>
+          <h3 class="service-card-title">Our Core Values</h3>
+          <p class="service-card-desc">
+            Absolute clinical integrity, patient-first empathy, continuous innovation through robotics, and radical transparency in pricing and reporting.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       SECTION 3: TIMELINE & EVOLUTION MILESTONES
+       ========================================================================== -->
+  <section class="section-padding" style="background: #ffffff;">
+    <div class="container">
+      <div class="section-head-center reveal-on-scroll">
+        <span class="section-badge-pill">Our Evolution</span>
+        <h2 class="section-title-large">A Decade of Diagnostic Excellence</h2>
+        <p class="section-sub-text">
+          From a boutique diagnostic clinic to a fully automated central pathology powerhouse.
+        </p>
+      </div>
+
+      <div class="timeline-container reveal-on-scroll delay-2">
+        <div class="timeline-item">
+          <div class="timeline-year">2014</div>
+          <div class="timeline-content">
+            <h4>Inception in Salem, TamilNadu</h4>
+            <p>Started as an advanced clinical biochemistry center catering to local hospitals and specialty clinics.</p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-year">2018</div>
+          <div class="timeline-content">
+            <h4>ISO 15189 & NABL Accreditation</h4>
+            <p>Achieved premier international laboratory quality certifications and scaled to 25+ collection centers.</p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-year">2022</div>
+          <div class="timeline-content">
+            <h4>Robotic Automation & NGS Genomic Lab</h4>
+            <p>Commissioned fully automated Roche and Siemens track systems alongside Next-Generation DNA Sequencing suites.</p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-year">2026</div>
+          <div class="timeline-content">
+            <h4>STACKLY AI & Doorstep Diagnostics</h4>
+            <p>Serving over 7,400+ patients monthly with digital biomarker reports and 6-hour verified delivery.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       SECTION 4: STATE-OF-THE-ART INFRASTRUCTURE (WITH IMAGES)
+       ========================================================================== -->
+  <section class="section-padding bg-slate">
+    <div class="container">
+      <div class="section-head-center reveal-on-scroll">
+        <span class="section-badge-pill">Robotic Lab Infrastructure</span>
+        <h2 class="section-title-large">World-Class Diagnostic Engineering</h2>
+        <p class="section-sub-text">
+          Our Salem Central Diagnostic Hub spans 15,000 sq.ft. of ultra-clean laboratory environments equipped with top-tier analytical systems.
+        </p>
+      </div>
+
+      <div class="features-quad-grid">
+        <div class="feature-quad-card reveal-on-scroll delay-1">
+          <div class="feature-img-box">
+            <img src="images/hero-slide-2.WEBP" alt="Automated Clinical Track System" loading="lazy">
+          </div>
+          <h3 class="feature-title">Roche Cobas & Siemens Track</h3>
+          <p class="feature-desc">Continuous high-throughput barcode specimen loading with dual verification cameras.</p>
+        </div>
+
+        <div class="feature-quad-card reveal-on-scroll delay-2">
+          <div class="feature-img-box">
+            <img src="images/hero-slide-3.WEBP" alt="Illumina NGS Sequencers" loading="lazy">
+          </div>
+          <h3 class="feature-title">Illumina NGS Genomic Suite</h3>
+          <p class="feature-desc">Whole exome and targeted cancer gene sequencing running 24/7 with bioinformatics pipelines.</p>
+        </div>
+
+        <div class="feature-quad-card reveal-on-scroll delay-3">
+          <div class="feature-img-box">
+            <img src="images/service_biochemistry.webp" alt="Cleanroom Sample Preparation" loading="lazy">
+          </div>
+          <h3 class="feature-title">Class 10,000 Cleanroom</h3>
+          <p class="feature-desc">HEPA-filtered positive-pressure sterile zones to prevent any external contamination.</p>
+        </div>
+
+        <div class="feature-quad-card reveal-on-scroll delay-4">
+          <div class="feature-img-box">
+            <img src="images/service_cryo_storage.webp" alt="Liquid Nitrogen Cryo Storage" loading="lazy">
+          </div>
+          <h3 class="feature-title">Cryogenic Bio-Banking</h3>
+          <p class="feature-desc">-80°C ultra-low freezers ensuring biospecimen integrity for longitudinal repeat testing.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       SECTION 5: ACCREDITATIONS & QUALITY ASSURANCE
+       ========================================================================== -->
+  <section class="teal-section">
+    <div class="container">
+      <div class="section-head-center reveal-on-scroll">
+        <span class="section-badge-pill" style="background: rgba(255,255,255,0.15); color: #ffffff;">Global Certifications</span>
+        <h2 class="section-title-large" style="color: #ffffff;">Recognized by Global Healthcare Standards</h2>
+        <p class="section-sub-text" style="color: rgba(255,255,255,0.85);">
+          Our rigorous internal and external blind proficiency testing ensures unmatched confidence in every single test report.
+        </p>
+      </div>
+
+      <div class="teal-stats-row reveal-on-scroll delay-2" style="border-top: none; margin-top: 0; padding-top: 0;">
+        <div class="stat-item-block">
+          <span class="stat-big-num">CAP</span>
+          <span class="stat-text-label">College of American Pathologists Accredited</span>
+        </div>
+        <div class="stat-item-block">
+          <span class="stat-big-num">ISO 15189</span>
+          <span class="stat-text-label">Medical Laboratories Quality Standard</span>
+        </div>
+        <div class="stat-item-block">
+          <span class="stat-big-num">NABL & CLIA</span>
+          <span class="stat-text-label">National & Clinical Improvement Certified</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       SECTION 6: CLINICAL LEADERSHIP & BOARD
+       ========================================================================== -->
+  <section class="specialists-section" id="specialists">
+    <div class="container">
+      <div class="section-head-center reveal-on-scroll">
+        <span class="section-badge-pill">Our Leaders</span>
+        <h2 class="section-title-large">Guided by Master Pathologists</h2>
+        <p class="section-sub-text">
+          Our department heads carry decades of clinical diagnostics and academic research experience.
+        </p>
+      </div>
+
+      <div class="specialists-grid">
+        <div class="specialist-card reveal-on-scroll delay-1">
+          <div class="specialist-photo-wrap">
+            <img src="images/dr_elena_rostova_ext.webp" alt="Dr. Elena Rostova MD Pathologist" loading="lazy">
+          </div>
+          <h3 class="specialist-name">Dr. Elena Rostova, MD</h3>
+          <div class="specialist-role">Chief Clinical Pathologist</div>
+          <p class="specialist-creds">Johns Hopkins Medicine • 18+ Yrs</p>
+        </div>
+
+        <div class="specialist-card reveal-on-scroll delay-2">
+          <div class="specialist-photo-wrap">
+            <img src="images/dr_alistair_vance_ext.webp" alt="Dr. Alistair Vance PhD Genetics" loading="lazy">
+          </div>
+          <h3 class="specialist-name">Dr. Alistair Vance, PhD</h3>
+          <div class="specialist-role">Head of Molecular Genetics</div>
+          <p class="specialist-creds">Oxford University • 15+ Yrs</p>
+        </div>
+
+        <div class="specialist-card reveal-on-scroll delay-3">
+          <div class="specialist-photo-wrap">
+            <img src="images/dr_miriam_patel.WEBP" alt="Dr. Miriam Patel MD Endocrinology" loading="lazy">
+          </div>
+          <h3 class="specialist-name">Dr. Miriam Patel, MD</h3>
+          <div class="specialist-role">Endocrinology & Biochemistry</div>
+          <p class="specialist-creds">Stanford Health Care • 12+ Yrs</p>
+        </div>
+
+        <div class="specialist-card reveal-on-scroll delay-4">
+          <div class="specialist-photo-wrap">
+            <img src="images/dr_david_kim_ext.webp" alt="Dr. David Kim MD Cardiology" loading="lazy">
+          </div>
+          <h3 class="specialist-name">Dr. David Kim, MD</h3>
+          <div class="specialist-role">Cardiovascular Biomarkers</div>
+          <p class="specialist-creds">Harvard Medical • 14+ Yrs</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       SECTION 7: AI & DIGITAL PATHOLOGY
+       ========================================================================== -->
+  <section class="section-padding bg-slate">
+    <div class="container">
+      <div class="services-rounded-card reveal-on-scroll delay-1" style="display: grid; grid-template-columns: 1.1fr 1fr; gap: 3rem; align-items: center; background: #ffffff; padding: 3.5rem; border-radius: var(--radius-xl);">
+        <div>
+          <span class="section-badge-pill">Technological Edge</span>
+          <h2 class="section-title-large" style="font-size: 2.2rem;">AI-Assisted Slide Analysis & Digital Reporting</h2>
+          <p style="color: var(--text-body); line-height: 1.7; margin-bottom: 1.5rem;">
+            STACKLY integrates neural image recognition to screen high-resolution whole-slide pathology images, flagging cellular abnormalities with 99.8% precision before final pathologist review.
+          </p>
+          <ul style="display: flex; flex-direction: column; gap: 0.75rem; color: var(--text-dark); font-weight: 600; margin-bottom: 2rem;">
+            <li>✓ Automated white blood cell differential counts</li>
+            <li>✓ Genomic variant annotation with global medical databases</li>
+            <li>✓ Real-time abnormal biomarker SMS & Doctor alerts</li>
+          </ul>
+          <a href="404.html" class="btn-hero-primary">Discover More</a>
+        </div>
+        <div style="border-radius: var(--radius-lg); overflow: hidden; box-shadow: 0 15px 35px rgba(0,0,0,0.1);">
+          <img src="images/hero-slide-3.WEBP" alt="AI Assisted Pathology" style="width: 100%; height: 100%; object-fit: cover;">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       SECTION 8: CTA BANNER
+       ========================================================================== -->
+  <section class="section-padding" style="background: linear-gradient(135deg, var(--primary-teal) 0%, var(--primary-teal-dark) 100%); color: #ffffff; text-align: center;">
+    <div class="container">
+      <div class="reveal-scale">
+        <h2 style="font-size: clamp(2rem, 3.5vw, 2.75rem); font-weight: 800; margin-bottom: 1rem;">Experience Diagnostic Precision Firsthand</h2>
+        <p style="max-width: 650px; margin: 0 auto 2.5rem; font-size: 1.1rem; color: rgba(255,255,255,0.9);">
+          Schedule your routine health screening, genetic panel, or home sample collection today with STACKLY.
+        </p>
+        <div style="display: flex; justify-content: center; gap: 1.25rem; flex-wrap: wrap;">
+          <a href="404.html" class="btn-hero-primary" style="background: var(--accent-cyan-btn); color: var(--text-dark);">Book Appointment</a>
+          <a href="404.html" class="btn-book-visit" style="background: rgba(255,255,255,0.15); color: #ffffff; border-color: rgba(255,255,255,0.3);">Explore Packages</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       FOOTER
+       ========================================================================== -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-top-grid">
+        <div>
+          <div class="footer-brand-title">
+            <img src="images/Logo.webp" alt="STACKLY Logo" class="brand-logo-img">
+          </div>
+          <p class="footer-brand-text">
+            Precision clinical diagnostics, high-throughput pathology, and molecular genomics delivering certified accuracy for clinicians and patients.
+          </p>
+          <div class="footer-accred-badges">
+            <span class="footer-pill">CAP Accredited</span>
+            <span class="footer-pill">ISO 15189:2022</span>
+            <span class="footer-pill">HIPAA Compliant</span>
+          </div>
+
+          <div class="footer-social-links">
+            <a href="404.html" class="footer-social-btn" aria-label="Facebook"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg></a>
+            <a href="404.html" class="footer-social-btn" aria-label="Twitter"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4l11.733 16h4.267l-11.733 -16z"></path><path d="M4 20l6.768 -6.768m2.46 -2.46l6.772 -6.772"></path></svg></a>
+            <a href="404.html" class="footer-social-btn" aria-label="LinkedIn"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg></a>
+            <a href="404.html" class="footer-social-btn" aria-label="Instagram"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg></a>
+            <a href="404.html" class="footer-social-btn" aria-label="YouTube"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"></path><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon></svg></a>
+          </div>
+        </div>
+
+        <div>
+          <h4 class="footer-heading">Diagnostic Services</h4>
+          <ul class="footer-links-list">
+            <li><a href="404.html" class="footer-link-item">General Diagnostic Testing</a></li>
+            <li><a href="404.html" class="footer-link-item">Specialized Genetic Testing</a></li>
+            <li><a href="404.html" class="footer-link-item">Hormone Insights Testing</a></li>
+            <li><a href="404.html" class="footer-link-item">Naturopathic Lab Testing</a></li>
+            <li><a href="404.html" class="footer-link-item">COVID19 Testing Solutions</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-heading">Patient Care</h4>
+          <ul class="footer-links-list">
+            <li><a href="404.html" class="footer-link-item">Book Home Collection</a></li>
+            <li><a href="404.html" class="footer-link-item">Health Packages & Pricing</a></li>
+            <li><a href="404.html" class="footer-link-item">Consult Pathologists</a></li>
+            <li><a href="404.html" class="footer-link-item">Doctor Registration Portal</a></li>
+            <li><a href="404.html" class="footer-link-item">Fasting Guidelines</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-heading">Central Diagnostic Hub</h4>
+          <div class="footer-contact-info">
+            <p>Salem, TamilNadu, India</p>
+            <p>24/7 Helpline: +91 98428 71840</p>
+            <p>support@stacklydiagnostics.com</p>
+            <p>Open 24/7 for Emergency Diagnostics</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom-strip">
+        <div>© 2026 STACKLY Precision Diagnostics Inc. All rights reserved.</div>
+        <div class="footer-legal-links">
+          <a href="404.html">Privacy Policy</a>
+          <a href="404.html">Terms of Service</a>
+          <a href="404.html">Security & HIPAA</a>
+          <a href="404.html">Quality Charter</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

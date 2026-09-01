@@ -1,0 +1,448 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blog & Clinical Insights | STACKLY Precision Diagnostics</title>
+  <meta name="description" content="Read clinical insights, preventative biomarker guides, genomics breakthroughs, and pathologist advice from STACKLY Precision Diagnostics.">
+  
+  <!-- Google Fonts: Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Ultra-Aesthetic Clinical Preloader -->
+  <div id="stacklyPreloader" class="preloader-overlay">
+    <div class="preloader-glow-orb preloader-glow-orb-1"></div>
+    <div class="preloader-glow-orb preloader-glow-orb-2"></div>
+    
+    <div class="preloader-content">
+      <div class="preloader-hero-emblem">
+        <div class="preloader-aura"></div>
+        <div class="preloader-orbit-ring preloader-orbit-ring-1"></div>
+        <div class="preloader-orbit-ring preloader-orbit-ring-2"></div>
+        <div class="preloader-core-glass">
+          <img src="images/Logo.webp" alt="STACKLY" class="preloader-logo-img">
+        </div>
+      </div>
+
+      <div class="preloader-tag">STACKLY • PRECISION LABS</div>
+      
+      <div class="preloader-big-number">
+        <span id="preloaderNum">00</span>
+        <span class="preloader-unit">%</span>
+      </div>
+      
+      <div class="preloader-progress-box">
+        <div class="preloader-progress-track">
+          <div id="preloaderProgressBar" class="preloader-progress-fill"></div>
+        </div>
+        <div class="preloader-status-ticker">
+          <span class="preloader-live-indicator"></span>
+          <span id="preloaderStatusText">Calibrating Optical Systems</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Top Scroll Progress Indicator -->
+  <div id="scrollProgressBar" class="scroll-progress-bar"></div>
+
+  <!-- ==========================================================================
+       HEADER NAVIGATION
+       ========================================================================== -->
+  <header class="header-nav scrolled" id="mainHeader">
+    <div class="header-container">
+      <a href="index.html" class="logo-brand">
+        <img src="images/Logo.webp" alt="STACKLY Logo" class="brand-logo-img">
+      </a>
+
+      <nav class="nav-menu">
+        <a href="index.html" class="nav-item">Home</a>
+        <a href="services.html" class="nav-item">Services</a>          
+        <a href="about.html" class="nav-item">About Us</a>
+        <a href="blog.html" class="nav-item active" style="color: var(--accent-cyan-btn);">Blog</a>
+        <a href="contact.html" class="nav-item">Contact Us</a>
+      </nav>
+
+      <div class="header-right">
+        <a href="login.html"><button class="btn-book-visit">
+          Login
+        </button></a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ==========================================================================
+       SECTION 1: BLOG HERO & FEATURED EDITORIAL
+       ========================================================================== -->
+  <section class="page-hero-banner" style="background: linear-gradient(180deg, rgba(8, 38, 70, 0.9) 0%, rgba(5, 23, 44, 0.95) 100%), url('images/hero-slide-3.WEBP') center/cover no-repeat;">
+    <div class="container text-center">
+      <span class="section-badge-pill" style="background: rgba(159, 232, 245, 0.15); color: var(--accent-cyan-btn);">Clinical Insights & Research</span>
+      <h1 class="hero-main-title" style="font-size: clamp(2.4rem, 4vw, 3.5rem); margin-bottom: 1.25rem;">
+        Medical Discoveries & Health Biomarkers
+      </h1>
+      <p class="hero-subtitle" style="max-width: 720px; margin: 0 auto 2rem;">
+        Stay informed with peer-reviewed diagnostic articles, preventative healthcare guides, and genetic medicine breakthroughs written by board-certified pathologists.
+      </p>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       SECTION 2: FEATURED SPOTLIGHT ARTICLE
+       ========================================================================== -->
+  <section class="section-padding" style="background: #ffffff;">
+    <div class="container">
+      <div class="services-rounded-card reveal-on-scroll delay-1" style="display: grid; grid-template-columns: 1.2fr 1fr; gap: 3.5rem; align-items: center; background: var(--bg-slate); padding: 3.5rem; border-radius: var(--radius-xl);">
+        <div style="border-radius: var(--radius-lg); overflow: hidden; box-shadow: 0 15px 35px rgba(0,0,0,0.1);">
+          <img src="images/hero-slide-3.WEBP" alt="Featured Medical Breakthrough" style="width: 100%; height: 100%; object-fit: cover;">
+        </div>
+        <div>
+          <span class="section-badge-pill" style="background: var(--card-bg-light); color: var(--primary-teal);">Featured Story</span>
+          <span style="font-size: 0.85rem; color: var(--text-muted); margin-left: 0.75rem;">August 28, 2026 • 6 min read</span>
+          <h2 class="section-title-large" style="font-size: 2.1rem; margin-top: 0.75rem;">Understanding Next-Gen Whole Exome Sequencing in Preventative Cardiology</h2>
+          <p style="color: var(--text-body); line-height: 1.7; margin-bottom: 1.5rem;">
+            How early identification of familial hypercholesterolemia gene mutations allows proactive preventative therapy decades before arterial plaque formation occurs.
+          </p>
+          <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.75rem;">
+            <div style="width: 44px; height: 44px; border-radius: 50%; overflow: hidden;">
+              <img src="images/dr_elena_rostova_ext.webp" alt="Dr. Elena Rostova" style="width: 100%; height: 100%; object-fit: cover;">
+            </div>
+            <div>
+              <div style="font-weight: 700; color: var(--text-dark);">Dr. Elena Rostova, MD</div>
+              <div style="font-size: 0.8rem; color: var(--primary-teal);">Chief Clinical Pathologist</div>
+            </div>
+          </div>
+          <a href="404.html" class="btn-hero-primary">Read Full Article</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       SECTION 3: PREVENTATIVE HEALTH & METABOLIC BIOMARKERS
+       ========================================================================== -->
+  <section class="section-padding bg-slate">
+    <div class="container">
+      <div class="section-head-center reveal-on-scroll">
+        <span class="section-badge-pill">Preventative Wellness</span>
+        <h2 class="section-title-large">Mastering Key Vital Biomarkers</h2>
+        <p class="section-sub-text">
+          Demystifying blood parameters to help you make actionable lifestyle and nutrition improvements.
+        </p>
+      </div>
+
+      <div class="teal-grid-3col" style="gap: 2rem;">
+        <!-- Card 1 -->
+        <div class="feature-quad-card reveal-on-scroll delay-1" style="background: #ffffff; padding: 0; overflow: hidden; border-radius: var(--radius-lg);">
+          <div style="height: 200px; overflow: hidden;">
+            <img src="images/pkg_essential_wellness.webp" alt="HbA1c Glucose Screening" style="width: 100%; height: 100%; object-fit: cover;">
+          </div>
+          <div style="padding: 1.75rem;">
+            <span class="section-badge-pill" style="font-size: 0.75rem;">Metabolic Health</span>
+            <h3 style="font-size: 1.25rem; font-weight: 700; color: var(--text-dark); margin: 0.75rem 0;">HbA1c vs. Fasting Blood Glucose: What's the True Difference?</h3>
+            <p style="font-size: 0.925rem; color: var(--text-body); line-height: 1.6; margin-bottom: 1.25rem;">Why 90-day glycated hemoglobin yields far superior insight into insulin resistance than snapshot fasting spikes.</p>
+            <a href="404.html" style="color: var(--primary-teal); font-weight: 700; font-size: 0.9rem;">Read Guide →</a>
+          </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="feature-quad-card reveal-on-scroll delay-2" style="background: #ffffff; padding: 0; overflow: hidden; border-radius: var(--radius-lg);">
+          <div style="height: 200px; overflow: hidden;">
+            <img src="images/pkg_cardio_metabolic.webp" alt="Lipid ApoB Analysis" style="width: 100%; height: 100%; object-fit: cover;">
+          </div>
+          <div style="padding: 1.75rem;">
+            <span class="section-badge-pill" style="font-size: 0.75rem;">Cardiology</span>
+            <h3 style="font-size: 1.25rem; font-weight: 700; color: var(--text-dark); margin: 0.75rem 0;">Why ApoB & Lp(a) Outperform Standard LDL Cholesterol Tests</h3>
+            <p style="font-size: 0.925rem; color: var(--text-body); line-height: 1.6; margin-bottom: 1.25rem;">A deep dive into atherogenic particle counts and why standard cholesterol panels miss 40% of cardiac risks.</p>
+            <a href="404.html" style="color: var(--primary-teal); font-weight: 700; font-size: 0.9rem;">Read Guide →</a>
+          </div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="feature-quad-card reveal-on-scroll delay-3" style="background: #ffffff; padding: 0; overflow: hidden; border-radius: var(--radius-lg);">
+          <div style="height: 200px; overflow: hidden;">
+            <img src="images/service_naturopathic.webp" alt="Vitamin D Deficiency" style="width: 100%; height: 100%; object-fit: cover;">
+          </div>
+          <div style="padding: 1.75rem;">
+            <span class="section-badge-pill" style="font-size: 0.75rem;">Endocrinology</span>
+            <h3 style="font-size: 1.25rem; font-weight: 700; color: var(--text-dark); margin: 0.75rem 0;">Optimal Vitamin D3 & B12 Levels for Cognitive & Immune Stamina</h3>
+            <p style="font-size: 0.925rem; color: var(--text-body); line-height: 1.6; margin-bottom: 1.25rem;">Why 'normal' reference ranges are often sub-optimal for peak energy and seasonal immune defense.</p>
+            <a href="404.html" style="color: var(--primary-teal); font-weight: 700; font-size: 0.9rem;">Read Guide →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       SECTION 4: GENOMICS & PERSONALIZED PHARMACOGENOMICS
+       ========================================================================== -->
+  <section class="teal-section">
+    <div class="container">
+      <div class="section-head-center reveal-on-scroll">
+        <span class="section-badge-pill" style="background: rgba(255,255,255,0.15); color: #ffffff;">Genomic Medicine</span>
+        <h2 class="section-title-large" style="color: #ffffff;">Precision Genomics in Modern Medicine</h2>
+        <p class="section-sub-text" style="color: rgba(255,255,255,0.85);">
+          How genetic profiling is transforming prescription accuracy and cancer prevention.
+        </p>
+      </div>
+
+      <div class="features-quad-grid" style="margin-top: 2rem;">
+        <div class="feature-quad-card reveal-on-scroll delay-1" style="background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); color: #ffffff;">
+          <h3 class="feature-title" style="color: #ffffff;">Pharmacogenomic Matching</h3>
+          <p class="feature-desc" style="color: rgba(255,255,255,0.8);">Prevent adverse drug reactions by mapping CYP450 liver enzyme metabolism genes.</p>
+        </div>
+
+        <div class="feature-quad-card reveal-on-scroll delay-2" style="background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); color: #ffffff;">
+          <h3 class="feature-title" style="color: #ffffff;">Hereditary Cancer Panels</h3>
+          <p class="feature-desc" style="color: rgba(255,255,255,0.8);">Screening BRCA1/2, Lynch Syndrome, and 30+ tumor suppressor pathways.</p>
+        </div>
+
+        <div class="feature-quad-card reveal-on-scroll delay-3" style="background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); color: #ffffff;">
+          <h3 class="feature-title" style="color: #ffffff;">Carrier Screening</h3>
+          <p class="feature-desc" style="color: rgba(255,255,255,0.8);">Pre-conception genetic screening for over 400 recessive genetic disorders.</p>
+        </div>
+
+        <div class="feature-quad-card reveal-on-scroll delay-4" style="background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); color: #ffffff;">
+          <h3 class="feature-title" style="color: #ffffff;">Polygenic Risk Scores</h3>
+          <p class="feature-desc" style="color: rgba(255,255,255,0.8);">Multi-locus algorithms determining lifetime susceptibility for Type 2 Diabetes.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       SECTION 5: PATHOLOGIST EDITORIAL COLUMNS
+       ========================================================================== -->
+  <section class="section-padding" style="background: #ffffff;">
+    <div class="container">
+      <div class="section-head-center reveal-on-scroll">
+        <span class="section-badge-pill">Expert Perspectives</span>
+        <h2 class="section-title-large">Doctor & Pathologist Columns</h2>
+        <p class="section-sub-text">
+          Insights directly from the minds interpreting complex diagnostics every day.
+        </p>
+      </div>
+
+      <div class="reviews-tri-grid">
+        <div class="review-card reveal-on-scroll delay-1" style="background: var(--bg-slate);">
+          <div style="font-size: 0.85rem; color: var(--primary-teal); font-weight: 700; margin-bottom: 0.5rem;">Endocrinology Insight</div>
+          <p class="review-text" style="font-style: normal; font-weight: 600; color: var(--text-dark); margin-bottom: 1.5rem;">
+            "Interpreting Free T3/T4 fluctuations in patients with subclinical Hashimoto's thyroiditis."
+          </p>
+          <div class="reviewer-meta">
+            <div class="reviewer-avatar-photo">
+              <img src="images/dr_miriam_patel.WEBP" alt="Dr. Miriam Patel" loading="lazy">
+            </div>
+            <div>
+              <div class="reviewer-name">Dr. Miriam Patel, MD</div>
+              <div class="reviewer-sub">Endocrinology & Biochemistry</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="review-card reveal-on-scroll delay-2" style="background: var(--bg-slate);">
+          <div style="font-size: 0.85rem; color: var(--primary-teal); font-weight: 700; margin-bottom: 0.5rem;">Molecular Genetics</div>
+          <p class="review-text" style="font-style: normal; font-weight: 600; color: var(--text-dark); margin-bottom: 1.5rem;">
+            "The transition from single gene PCR to multi-target next generation oncology panels."
+          </p>
+          <div class="reviewer-meta">
+            <div class="reviewer-avatar-photo">
+              <img src="images/dr_alistair_vance_ext.webp" alt="Dr. Alistair Vance" loading="lazy">
+            </div>
+            <div>
+              <div class="reviewer-name">Dr. Alistair Vance, PhD</div>
+              <div class="reviewer-sub">Head of Molecular Genetics</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="review-card reveal-on-scroll delay-3" style="background: var(--bg-slate);">
+          <div style="font-size: 0.85rem; color: var(--primary-teal); font-weight: 700; margin-bottom: 0.5rem;">Cardiac Biomarkers</div>
+          <p class="review-text" style="font-style: normal; font-weight: 600; color: var(--text-dark); margin-bottom: 1.5rem;">
+            "High-Sensitivity Troponin I: Early detection of micro-ischemic cardiac events."
+          </p>
+          <div class="reviewer-meta">
+            <div class="reviewer-avatar-photo">
+              <img src="images/dr_david_kim_ext.webp" alt="Dr. David Kim" loading="lazy">
+            </div>
+            <div>
+              <div class="reviewer-name">Dr. David Kim, MD</div>
+              <div class="reviewer-sub">Cardiovascular Biomarkers</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       SECTION 6: PATIENT HEALTH TIPS & LIFESTYLE GUIDES
+       ========================================================================== -->
+  <section class="section-padding bg-slate">
+    <div class="container">
+      <div class="section-head-center reveal-on-scroll">
+        <span class="section-badge-pill">Practical Health</span>
+        <h2 class="section-title-large">Actionable Steps for Everyday Vitality</h2>
+        <p class="section-sub-text">
+          Science-backed habits that reflect positively in your ongoing lab reports.
+        </p>
+      </div>
+
+      <div class="features-quad-grid">
+        <div class="feature-quad-card reveal-on-scroll delay-1">
+          <h3 class="feature-title">Hydration & Electrolytes</h3>
+          <p class="feature-desc">Balancing sodium, potassium, and magnesium ratios for stable blood pressure and kidney filtration.</p>
+        </div>
+
+        <div class="feature-quad-card reveal-on-scroll delay-2">
+          <h3 class="feature-title">Circadian Sleep Cycles</h3>
+          <p class="feature-desc">Consistent 7-8 hour sleep schedules to regulate cortisol and early morning fasting glucose levels.</p>
+        </div>
+
+        <div class="feature-quad-card reveal-on-scroll delay-3">
+          <h3 class="feature-title">Microbiome Nutrition</h3>
+          <p class="feature-desc">Fermented fibers and polyphenols to reduce systemic inflammatory biomarkers like hs-CRP.</p>
+        </div>
+
+        <div class="feature-quad-card reveal-on-scroll delay-4">
+          <h3 class="feature-title">Zone 2 Cardiovascular Work</h3>
+          <p class="feature-desc">Enhancing mitochondrial density and cellular glucose uptake with low-intensity aerobic training.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       SECTION 7: NEWSLETTER SUBSCRIPTION DIGEST
+       ========================================================================== -->
+  <section class="section-padding" style="background: linear-gradient(135deg, var(--card-bg-light) 0%, #ffffff 100%);">
+    <div class="container" style="max-width: 800px; text-align: center;">
+      <div class="reveal-scale">
+        <span class="section-badge-pill">Monthly Research Digest</span>
+        <h2 class="section-title-large">Stay at the Forefront of Medical Science</h2>
+        <p class="section-sub-text" style="margin-bottom: 2rem;">
+          Subscribe to receive monthly biomarker summaries, clinical trial updates, and dietary optimization guides curated by our medical board.
+        </p>
+        <form onsubmit="event.preventDefault(); showToast('Thank you for subscribing to STACKLY Digest!');" style="display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap;">
+          <input type="email" placeholder="Enter your email address" required style="padding: 0.9rem 1.5rem; border-radius: var(--radius-pill); border: 1px solid #cbd5e1; font-size: 1rem; width: 340px; max-width: 100%;">
+          <a href="404.html"><button type="submit" class="btn-hero-primary">Subscribe Free</button></a>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       SECTION 8: RECENT LAB PRESS RELEASES
+       ========================================================================== -->
+  <section class="section-padding" style="background: #ffffff;">
+    <div class="container">
+      <div class="section-head-center reveal-on-scroll">
+        <span class="section-badge-pill">Press & Media</span>
+        <h2 class="section-title-large">STACKLY News & Lab Expansions</h2>
+      </div>
+
+      <div class="teal-grid-3col" style="gap: 1.75rem;">
+        <div class="service-rounded-card reveal-on-scroll delay-1" style="background: var(--bg-slate); padding: 2rem;">
+          <div style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.5rem;">August 15, 2026</div>
+          <h4 style="font-size: 1.15rem; font-weight: 700; color: var(--text-dark); margin-bottom: 0.75rem;">Commissioning of New High-Throughput Track in Salem Central Hub</h4>
+          <p style="font-size: 0.9rem; color: var(--text-body); line-height: 1.6;">Expanding automated processing capacity to 20,000 tubes daily with automated centrifuges.</p>
+        </div>
+
+        <div class="service-rounded-card reveal-on-scroll delay-2" style="background: var(--bg-slate); padding: 2rem;">
+          <div style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.5rem;">July 22, 2026</div>
+          <h4 style="font-size: 1.15rem; font-weight: 700; color: var(--text-dark); margin-bottom: 0.75rem;">STACKLY Diagnostics Renews CAP Accreditation with Perfect 100% Score</h4>
+          <p style="font-size: 0.9rem; color: var(--text-body); line-height: 1.6;">Recognizing rigorous analytical quality and zero-variance blind proficiency standard adherence.</p>
+        </div>
+
+        <div class="service-rounded-card reveal-on-scroll delay-3" style="background: var(--bg-slate); padding: 2rem;">
+          <div style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.5rem;">June 10, 2026</div>
+          <h4 style="font-size: 1.15rem; font-weight: 700; color: var(--text-dark); margin-bottom: 0.75rem;">Launch of 10-Minute Rapid Cardiac Biomarker STAT Service for Hospitals</h4>
+          <p style="font-size: 0.9rem; color: var(--text-body); line-height: 1.6;">Supporting intensive care units with rapid point-of-care hs-Troponin and D-Dimer verification.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       FOOTER
+       ========================================================================== -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-top-grid">
+        <div>
+          <div class="footer-brand-title">
+            <img src="images/Logo.webp" alt="STACKLY Logo" class="brand-logo-img">
+          </div>
+          <p class="footer-brand-text">
+            Precision clinical diagnostics, high-throughput pathology, and molecular genomics delivering certified accuracy for clinicians and patients.
+          </p>
+          <div class="footer-accred-badges">
+            <span class="footer-pill">CAP Accredited</span>
+            <span class="footer-pill">ISO 15189:2022</span>
+            <span class="footer-pill">HIPAA Compliant</span>
+          </div>
+
+          <div class="footer-social-links">
+            <a href="404.html" class="footer-social-btn" aria-label="Facebook"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg></a>
+            <a href="404.html" class="footer-social-btn" aria-label="Twitter"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4l11.733 16h4.267l-11.733 -16z"></path><path d="M4 20l6.768 -6.768m2.46 -2.46l6.772 -6.772"></path></svg></a>
+            <a href="404.html" class="footer-social-btn" aria-label="LinkedIn"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg></a>
+            <a href="404.html" class="footer-social-btn" aria-label="Instagram"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg></a>
+            <a href="404.html" class="footer-social-btn" aria-label="YouTube"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"></path><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon></svg></a>
+          </div>
+        </div>
+
+        <div>
+          <h4 class="footer-heading">Diagnostic Services</h4>
+          <ul class="footer-links-list">
+            <li><a href="404.html" class="footer-link-item">General Diagnostic Testing</a></li>
+            <li><a href="404.html" class="footer-link-item">Specialized Genetic Testing</a></li>
+            <li><a href="404.html" class="footer-link-item">Hormone Insights Testing</a></li>
+            <li><a href="404.html" class="footer-link-item">Naturopathic Lab Testing</a></li>
+            <li><a href="404.html" class="footer-link-item">COVID19 Testing Solutions</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-heading">Patient Care</h4>
+          <ul class="footer-links-list">
+            <li><a href="404.html" class="footer-link-item">Book Home Collection</a></li>
+            <li><a href="404.html" class="footer-link-item">Health Packages & Pricing</a></li>
+            <li><a href="404.html" class="footer-link-item">Consult Pathologists</a></li>
+            <li><a href="404.html" class="footer-link-item">Doctor Registration Portal</a></li>
+            <li><a href="404.html" class="footer-link-item">Fasting Guidelines</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-heading">Central Diagnostic Hub</h4>
+          <div class="footer-contact-info">
+            <p>Salem, TamilNadu, India</p>
+            <p>24/7 Helpline: +91 98428 71840</p>
+            <p>support@stacklydiagnostics.com</p>
+            <p>Open 24/7 for Emergency Diagnostics</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom-strip">
+        <div>© 2026 STACKLY Precision Diagnostics Inc. All rights reserved.</div>
+        <div class="footer-legal-links">
+          <a href="404.html">Privacy Policy</a>
+          <a href="404.html">Terms of Service</a>
+          <a href="404.html">Security & HIPAA</a>
+          <a href="404.html">Quality Charter</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

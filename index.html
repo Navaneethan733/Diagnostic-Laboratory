@@ -1,0 +1,928 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>STACKLY - Clear and Insightful Testing Results!</title>
+  <meta name="description" content="STACKLY Precision Diagnostics delivers clear and insightful testing results with advanced diagnostic testing, specialized genetic testing, hormone insights, and comprehensive healthcare solutions.">
+  
+  <!-- Google Fonts: Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Ultra-Aesthetic Clinical Preloader -->
+  <div id="stacklyPreloader" class="preloader-overlay">
+    <div class="preloader-glow-orb preloader-glow-orb-1"></div>
+    <div class="preloader-glow-orb preloader-glow-orb-2"></div>
+    
+    <div class="preloader-content">
+      <div class="preloader-hero-emblem">
+        <div class="preloader-aura"></div>
+        <div class="preloader-orbit-ring preloader-orbit-ring-1"></div>
+        <div class="preloader-orbit-ring preloader-orbit-ring-2"></div>
+        <div class="preloader-core-glass">
+          <img src="images/Logo.webp" alt="STACKLY" class="preloader-logo-img">
+        </div>
+      </div>
+
+      <div class="preloader-tag">STACKLY • PRECISION LABS</div>
+      
+      <div class="preloader-big-number">
+        <span id="preloaderNum">00</span>
+        <span class="preloader-unit">%</span>
+      </div>
+      
+      <div class="preloader-progress-box">
+        <div class="preloader-progress-track">
+          <div id="preloaderProgressBar" class="preloader-progress-fill"></div>
+        </div>
+        <div class="preloader-status-ticker">
+          <span class="preloader-live-indicator"></span>
+          <span id="preloaderStatusText">Calibrating Optical Systems</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Top Scroll Progress Indicator -->
+  <div id="scrollProgressBar" class="scroll-progress-bar"></div>
+
+  <!-- ==========================================================================
+       HERO SECTION WITH TRANSPARENT HEADER & SLIDER
+       ========================================================================== -->
+  <div class="hero-wrapper" id="heroSection">
+    <!-- Animated Slide Background Images -->
+    <div class="hero-slides-container" id="heroSlidesContainer">
+      <div class="hero-slide active" style="background-image: url('images/hero-bg.webp');"></div>
+      <div class="hero-slide" style="background-image: url('images/hero-slide-2.webp');"></div>
+      <div class="hero-slide" style="background-image: url('images/hero-slide-3.webp');"></div>
+    </div>
+
+    <div class="hero-overlay"></div>
+
+    <!-- Header Navigation (Fixed Sticky on Scroll) -->
+    <header class="header-nav" id="mainHeader">
+      <div class="header-container">
+        <a href="#" class="logo-brand">
+          <img src="images/Logo.webp" alt="STACKLY Logo" class="brand-logo-img">
+        </a>
+
+        <nav class="nav-menu">
+          <a href="#heroSection" class="nav-item">Home</a>
+          <a href="services.html" class="nav-item">Services</a>          
+          <a href="about.html" class="nav-item">About Us</a>
+          <a href="blog.html" class="nav-item">Blog</a>
+          <a href="contact.html" class="nav-item">Contact Us</a>
+        </nav>
+
+        <div class="header-right">
+          <!-- Book a Visit CTA -->
+          <a href="login.html"><button class="btn-book-visit" >
+            Login
+          </button></a>
+        </div>
+      </div>
+    </header>
+
+    <!-- Slider Navigation Arrows -->
+    <button class="slider-arrow-btn slider-arrow-left" onclick="slideHero('prev')" aria-label="Previous Slide">
+      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M19 12H5"></path>
+        <path d="m12 19-7-7 7-7"></path>
+      </svg>
+    </button>
+    <button class="slider-arrow-btn slider-arrow-right" onclick="slideHero('next')" aria-label="Next Slide">
+      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M5 12h14"></path>
+        <path d="m12 5 7 7-7 7"></path>
+      </svg>
+    </button>
+
+    <!-- Center Hero Copy -->
+    <div class="hero-center">
+      <h1 class="hero-main-title">
+        Clear and Insightful<br>Testing Results!
+      </h1>
+      <p class="hero-subtitle">
+        We continually leverage our medical expertise to develop top-tier testing services while investing in cutting-edge technology to revolutionize healthcare delivery.
+      </p>
+
+      <div class="hero-actions-row">
+        <button class="btn-hero-primary" onclick="openBookingModal('General Diagnostic')">
+          Book a Visit
+        </button>
+        <a href="404.html" class="hero-link-request">
+          <span>Request Test</span>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M5 12h14"></path>
+            <path d="m12 5 7 7-7 7"></path>
+          </svg>
+        </a>
+      </div>
+
+      <!-- Slider Pagination Dots -->
+      <div class="hero-slider-dots" id="heroSliderDots">
+        <a href="404.html"></a><button class="hero-dot active"></button>
+        <a href="404.html"></a><button class="hero-dot"></button>
+        <a href="404.html"></a><button class="hero-dot"></button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       TEAL 3-COLUMN INFO & STATS SECTION (IMAGE 1)
+       ========================================================================== -->
+  <section class="teal-section" id="tealSection">
+    <div class="container">
+      <!-- 3 Columns with Vertical Line Dividers -->
+      <div class="teal-grid-3col">
+        <!-- Col 1: COVID19 Testing Solutions -->
+        <div class="teal-col-card reveal-on-scroll delay-1">
+          <div class="teal-thumb-img-box">
+            <img src="images/service_phlebotomy.webp" alt="COVID19 Testing Laboratory Solutions" loading="lazy">
+          </div>
+          <div class="teal-icon-box">
+            <!-- Syringe with bubbles icon -->
+            <svg width="46" height="46" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="m18 2 4 4"></path>
+              <path d="m17 7 3-3"></path>
+              <path d="M19 9 8.7 19.3c-.4.4-1 .6-1.6.6H3v-4.1c0-.6.2-1.2.6-1.6L14 3.9"></path>
+              <path d="m9 11 4 4"></path>
+              <path d="m5 19-3 3"></path>
+              <circle cx="17" cy="17" r="1"></circle>
+              <circle cx="15" cy="19" r="1"></circle>
+            </svg>
+          </div>
+          <h3 class="teal-col-title">COVID19 Testing Solutions</h3>
+          <p class="teal-col-desc">
+            Comprehensive testing solutions for accurate, timely detection and prevention, ensuring public health.
+          </p>
+          <a href="404.html" class="teal-col-link">
+            <span>Request Test</span>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M5 12h14"></path>
+              <path d="m12 5 7 7-7 7"></path>
+            </svg>
+          </a>
+        </div>
+
+        <!-- Col 2: I'm a Healthcare Provider -->
+        <div class="teal-col-card reveal-on-scroll delay-2">
+          <div class="teal-thumb-img-box">
+            <img src="images/service_provider_portal.webp" alt="Healthcare Provider Portal" loading="lazy">
+          </div>
+          <div class="teal-icon-box">
+            <!-- Hexagonal molecular structure icon -->
+            <svg width="46" height="46" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="8" cy="6" r="2.5"></circle>
+              <circle cx="16" cy="6" r="2.5"></circle>
+              <circle cx="12" cy="12" r="2.5"></circle>
+              <circle cx="6" cy="18" r="2.5"></circle>
+              <circle cx="18" cy="18" r="2.5"></circle>
+              <path d="M9.8 7.2 10.7 10.4"></path>
+              <path d="M14.2 7.2 13.3 10.4"></path>
+              <path d="M10.4 13.8 7.6 16.5"></path>
+              <path d="M13.6 13.8 16.4 16.5"></path>
+            </svg>
+          </div>
+          <h3 class="teal-col-title">I'm a Healthcare Provider</h3>
+          <p class="teal-col-desc">
+            I offer comprehensive and personalized medicine, using the latest advances to ensure results.
+          </p>
+          <a href="404.html" class="teal-col-link">
+            <span>Registration</span>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M5 12h14"></path>
+              <path d="m12 5 7 7-7 7"></path>
+            </svg>
+          </a>
+        </div>
+
+        <!-- Col 3: I'm a Patient -->
+        <div class="teal-col-card reveal-on-scroll delay-3">
+          <div class="teal-thumb-img-box">
+            <img src="images/service_patient_testing.webp" alt="Patient Clinical Testing" loading="lazy">
+          </div>
+          <div class="teal-icon-box">
+            <!-- Sprouting flask/leaf line icon -->
+            <svg width="46" height="46" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M9 3h6"></path>
+              <path d="M10 3v4.5l-4 6.5A3 3 0 0 0 8.6 18h6.8a3 3 0 0 0 2.6-4L14 7.5V3"></path>
+              <path d="M12 11v4"></path>
+              <path d="M10 13c1-1 3 0 4-1"></path>
+              <circle cx="19" cy="8" r="1.5"></circle>
+              <circle cx="5" cy="8" r="1.5"></circle>
+            </svg>
+          </div>
+          <h3 class="teal-col-title">I'm a Patient</h3>
+          <p class="teal-col-desc">
+            I seek compassionate and thorough medical care and individualized treatment plans for my well-being.
+          </p>
+          <a href="404.html" class="teal-col-link">
+            <span>Appointment</span>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M5 12h14"></path>
+              <path d="m12 5 7 7-7 7"></path>
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Bottom Stats Row with Counter Animation -->
+      <div class="teal-stats-row reveal-on-scroll delay-2">
+        <div class="stat-item-block">
+          <span class="stat-big-num counter-item" data-target="7.4" data-suffix="k+">0k+</span>
+          <span class="stat-text-label">Tests & Patients Served in 2024</span>
+        </div>
+        <div class="stat-item-block">
+          <span class="stat-big-num counter-item" data-target="98" data-suffix="%">0%</span>
+          <span class="stat-text-label">Client Satisfaction Rate for Services</span>
+        </div>
+        <div class="stat-item-block">
+          <span class="stat-big-num counter-item" data-target="1.1" data-suffix="k+">0k+</span>
+          <span class="stat-text-label">Free Patient Visits Done Each Month</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       SERVICES GRID: "FIND THE RIGHT TEST FOR YOUR NEEDS" (IMAGE 2)
+       ========================================================================== -->
+  <section id="services" class="services-grid-section">
+    <div class="container">
+      <div class="services-layout-grid">
+        
+        <!-- Card 1 (Top Left): Main Display Heading -->
+        <div class="services-title-card reveal-left">
+          <h2 class="services-main-heading">
+            Find The<br>
+            Right Test For<br>
+            Your Needs
+          </h2>
+        </div>
+
+        <!-- Card 2 (Top Middle): Comprehensive Diagnostic -->
+        <div class="service-rounded-card reveal-on-scroll delay-1">
+          <div class="service-card-img-wrap">
+            <img src="images/service_imaging.webp" alt="Comprehensive Diagnostic MRI CT" loading="lazy">
+          </div>
+          <div>
+            <h3 class="service-card-title">Comprehensive Diagnostic</h3>
+            <p class="service-card-desc">
+              We offer a range of imaging modalities, including MRI, CT scans, ultrasound, and X-rays, to deliver precise and visualizations.
+            </p>
+          </div>
+          <a href="404.html" class="service-card-link">
+            <span>All services</span>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M5 12h14"></path>
+              <path d="m12 5 7 7-7 7"></path>
+            </svg>
+          </a>
+        </div>
+
+        <!-- Card 3 (Top Right): General Diagnostic Testing -->
+        <div class="service-rounded-card reveal-on-scroll delay-2">
+          <div class="service-card-img-wrap">
+            <img src="images/service_biochemistry.webp" alt="General Diagnostic Testing Automation" loading="lazy">
+          </div>
+          <div class="service-card-icon">
+            <!-- Gear with beaker/flask icon -->
+            <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 2v2"></path>
+              <path d="M12 20v2"></path>
+              <path d="m4.93 4.93 1.41 1.41"></path>
+              <path d="m17.66 17.66 1.41 1.41"></path>
+              <path d="M2 12h2"></path>
+              <path d="M20 12h2"></path>
+              <path d="m6.34 17.66-1.41 1.41"></path>
+              <path d="m19.07 4.93-1.41 1.41"></path>
+              <path d="M10 9v1.5L8 14h8l-2-3.5V9"></path>
+              <path d="M9 9h6"></path>
+            </svg>
+          </div>
+          <div>
+            <h3 class="service-card-title">General Diagnostic Testing</h3>
+            <p class="service-card-desc">
+              Comprehensive diagnostic testing services for accurate, timely, and reliable health assessments and disease detection.
+            </p>
+          </div>
+        </div>
+
+        <!-- Card 4 (Bottom Left): Specialized Genetic Testing -->
+        <div class="service-rounded-card reveal-on-scroll delay-1">
+          <div class="service-card-img-wrap">
+            <img src="images/service_genetic.webp" alt="Specialized Genetic Testing NGS" loading="lazy">
+          </div>
+          <div class="service-card-icon">
+            <!-- Hexagonal molecular structure icon -->
+            <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 2v4"></path>
+              <path d="M12 18v4"></path>
+              <path d="M4 7l3.5 2"></path>
+              <path d="M16.5 15l3.5 2"></path>
+              <path d="M4 17l3.5-2"></path>
+              <path d="M16.5 9l3.5-2"></path>
+              <circle cx="12" cy="6" r="2"></circle>
+              <circle cx="12" cy="18" r="2"></circle>
+              <circle cx="4" cy="7" r="2"></circle>
+              <circle cx="20" cy="7" r="2"></circle>
+              <circle cx="4" cy="17" r="2"></circle>
+              <circle cx="20" cy="17" r="2"></circle>
+            </svg>
+          </div>
+          <div>
+            <h3 class="service-card-title">Specialized Genetic Testing</h3>
+            <p class="service-card-desc">
+              Advanced genetic testing services for precise diagnosis and personalized treatment plans.
+            </p>
+          </div>
+        </div>
+
+        <!-- Card 5 (Bottom Middle): Naturopathic Lab Testing -->
+        <div class="service-rounded-card reveal-on-scroll delay-2">
+          <div class="service-card-img-wrap">
+            <img src="images/service_naturopathic.webp" alt="Naturopathic Holistic Lab Testing" loading="lazy">
+          </div>
+          <div class="service-card-icon">
+            <!-- Flask with plant/leaf sprout icon -->
+            <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M9 3h6"></path>
+              <path d="M10 3v4.5l-4 6.5A3 3 0 0 0 8.6 18h6.8a3 3 0 0 0 2.6-4L14 7.5V3"></path>
+              <path d="M12 11v3"></path>
+              <path d="M12 12c1.5-1.5 3-.5 3 1s-1.5 2.5-3 1"></path>
+              <circle cx="17" cy="8" r="1.5"></circle>
+              <circle cx="6" cy="8" r="1.5"></circle>
+            </svg>
+          </div>
+          <div>
+            <h3 class="service-card-title">Naturopathic Lab Testing</h3>
+            <p class="service-card-desc">
+              Comprehensive lab testing for holistic health insights and naturopathic treatment planning.
+            </p>
+          </div>
+        </div>
+
+        <!-- Card 6 (Bottom Right): Hormone Insights Testing -->
+        <div class="service-rounded-card reveal-on-scroll delay-3">
+          <div class="service-card-img-wrap">
+            <img src="images/service_hormone.webp" alt="Hormone Insights Testing CLIA" loading="lazy">
+          </div>
+          <div class="service-card-icon">
+            <!-- Molecule network nodes icon -->
+            <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="3"></circle>
+              <circle cx="19" cy="5" r="2.5"></circle>
+              <circle cx="5" cy="5" r="2.5"></circle>
+              <circle cx="5" cy="19" r="2.5"></circle>
+              <circle cx="19" cy="19" r="2.5"></circle>
+              <path d="M10.2 10.2 6.8 6.8"></path>
+              <path d="M13.8 10.2 17.2 6.8"></path>
+              <path d="M10.2 13.8 6.8 17.2"></path>
+              <path d="M13.8 13.8 17.2 17.2"></path>
+            </svg>
+          </div>
+          <div>
+            <h3 class="service-card-title">Hormone Insights Testing</h3>
+            <p class="service-card-desc">
+              Detailed hormone testing for accurate insights into hormonal balance and health.
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       SECTION 1: WHY CHOOSE STACKLY (WITH IMAGES)
+       ========================================================================== -->
+  <section class="why-stackly-section">
+    <div class="container">
+      <div class="section-head-center reveal-on-scroll">
+        <span class="section-badge-pill">Quality Standards</span>
+        <h2 class="section-title-large">Why Patients & Doctors Trust STACKLY</h2>
+        <p class="section-sub-text">
+          We combine cutting-edge robotic laboratory automation, strict international accreditation standards, and certified pathologist oversight to deliver diagnostics you can rely on.
+        </p>
+      </div>
+
+      <div class="features-quad-grid">
+        <div class="feature-quad-card reveal-on-scroll delay-1">
+          <div class="feature-img-box">
+            <img src="images/service_biochemistry.webp" alt="High-Throughput Automation" loading="lazy">
+          </div>
+          <h3 class="feature-title">High-Throughput Automation</h3>
+          <p class="feature-desc">
+            Zero-touch automated analyzer tracks eliminating 99.9% of pre-analytical errors for absolute precision.
+          </p>
+        </div>
+
+        <div class="feature-quad-card reveal-on-scroll delay-2">
+          <div class="feature-img-box">
+            <img src="images/service_cryo_storage.webp" alt="Sterile Cold-Chain Transport" loading="lazy">
+          </div>
+          <h3 class="feature-title">100% Sterile Cold-Chain</h3>
+          <p class="feature-desc">
+            Temperature-controlled sample transport from doorstep collection straight to central testing hubs.
+          </p>
+        </div>
+
+        <div class="feature-quad-card reveal-on-scroll delay-3">
+          <div class="feature-img-box">
+            <img src="images/service_digital_reports.webp" alt="Same-Day Digital Reports" loading="lazy">
+          </div>
+          <h3 class="feature-title">Same-Day Digital Reports</h3>
+          <p class="feature-desc">
+            Instant SMS, email, and secure patient portal access to digitally signed PDF laboratory results in &lt; 6 hours.
+          </p>
+        </div>
+
+        <div class="feature-quad-card reveal-on-scroll delay-4">
+          <div class="feature-img-box">
+            <img src="images/service_patient_testing.webp" alt="CAP ISO Certified Laboratory" loading="lazy">
+          </div>
+          <h3 class="feature-title">CAP & ISO 15189 Certified</h3>
+          <p class="feature-desc">
+            Globally recognized quality certifications accepted by all major hospitals, physicians, and insurance plans.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       SECTION 2: 4-STEP DIAGNOSTIC WORKFLOW (WITH IMAGES)
+       ========================================================================== -->
+  <section class="workflow-section">
+    <div class="container">
+      <div class="section-head-center reveal-on-scroll">
+        <span class="section-badge-pill">How It Works</span>
+        <h2 class="section-title-large">Our 4-Step Seamless Process</h2>
+        <p class="section-sub-text">
+          Getting tested with STACKLY is simple, convenient, and tailored around your busy lifestyle.
+        </p>
+      </div>
+
+      <div class="workflow-steps-grid">
+        <div class="workflow-card reveal-on-scroll delay-1">
+          <div class="workflow-img-box">
+            <img src="images/service_digital_reports.webp" alt="Select Your Test Online" loading="lazy">
+          </div>
+          <div class="step-num-badge">01</div>
+          <h3 class="step-title">Select Your Test</h3>
+          <p class="step-desc">
+            Choose from 500+ specialized assays or preventative health packages on our intuitive online portal.
+          </p>
+        </div>
+
+        <div class="workflow-card reveal-on-scroll delay-2">
+          <div class="workflow-img-box">
+            <img src="images/service_phlebotomy.webp" alt="Doorstep Sample Collection" loading="lazy">
+          </div>
+          <div class="step-num-badge">02</div>
+          <h3 class="step-title">Doorstep or Lab Visit</h3>
+          <p class="step-desc">
+            Book a certified phlebotomist to collect your sample at home, or visit any of our central diagnostic clinics.
+          </p>
+        </div>
+
+        <div class="workflow-card reveal-on-scroll delay-3">
+          <div class="workflow-img-box">
+            <img src="images/service_biochemistry.webp" alt="Robotic Lab Analyzer" loading="lazy">
+          </div>
+          <div class="step-num-badge">03</div>
+          <h3 class="step-title">Robotic Analysis</h3>
+          <p class="step-desc">
+            Your specimen is analyzed with dual-redundancy quality controls and verified by expert clinical pathologists.
+          </p>
+        </div>
+
+        <div class="workflow-card reveal-on-scroll delay-4">
+          <div class="workflow-img-box">
+            <img src="images/pkg_essential_wellness.webp" alt="Get Clear Digital Lab Results" loading="lazy">
+          </div>
+          <div class="step-num-badge">04</div>
+          <h3 class="step-title">Get Clear Reports</h3>
+          <p class="step-desc">
+            Receive interactive biomarker visualizations and a physician-ready report delivered directly to your device.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       SECTION 3: FEATURED HEALTH PACKAGES & PRICING (WITH IMAGES)
+       ========================================================================== -->
+  <section class="packages-section" id="packages">
+    <div class="container">
+      <div class="section-head-center reveal-on-scroll">
+        <span class="section-badge-pill">Preventative Wellness</span>
+        <h2 class="section-title-large">Popular Comprehensive Health Packages</h2>
+        <p class="section-sub-text">
+          Scientifically bundled biomarker checkups designed for preventative wellness, early detection, and long-term health.
+        </p>
+      </div>
+
+      <div class="packages-tier-grid">
+        <!-- Package 1 -->
+        <div class="package-card reveal-on-scroll delay-1">
+          <div class="package-img-box">
+            <img src="images/pkg_essential_wellness.webp" alt="Essential Wellness Health Package" loading="lazy">
+          </div>
+          <div>
+            <h3 class="package-name">Essential Wellness</h3>
+            <p class="package-desc">Routine baseline vital screening for energetic adults.</p>
+            <div class="package-price-row">
+              <span class="package-price">$49</span>
+              <span class="package-period">/ checkup</span>
+            </div>
+            <ul class="package-features-list">
+              <li><span class="check-icon">✓</span> Complete Blood Count (CBC)</li>
+              <li><span class="check-icon">✓</span> Fasting Glucose & HbA1c</li>
+              <li><span class="check-icon">✓</span> Lipid Profile & Cholesterol</li>
+              <li><span class="check-icon">✓</span> Basic Kidney Function (KFT)</li>
+              <li><span class="check-icon">✓</span> Digital Lab Report in 6 Hours</li>
+            </ul>
+          </div>
+          <a href="404.html"><button class="btn-book-visit" style="width: 100%; text-align: center;">
+            Book Essential Plan
+          </button></a>
+        </div>
+
+        <!-- Package 2 (Highlighted) -->
+        <div class="package-card highlighted reveal-on-scroll delay-2">
+          <span class="package-ribbon">Most Popular</span>
+          <div class="package-img-box">
+            <img src="images/pkg_cardio_metabolic.webp" alt="Cardio Metabolic Pro Health Package" loading="lazy">
+          </div>
+          <div>
+            <h3 class="package-name">Cardio-Metabolic Pro</h3>
+            <p class="package-desc">Complete cardiometabolic, hormone & liver organ workup.</p>
+            <div class="package-price-row">
+              <span class="package-price" style="color: var(--primary-teal);">$129</span>
+              <span class="package-period">/ checkup</span>
+            </div>
+            <ul class="package-features-list">
+              <li><span class="check-icon">✓</span> All 42 Essential Biomarkers</li>
+              <li><span class="check-icon">✓</span> Complete Liver Function (LFT)</li>
+              <li><span class="check-icon">✓</span> Thyroid Ultra-TSH Profile</li>
+              <li><span class="check-icon">✓</span> Vitamin D3 & Vitamin B12 Duo</li>
+              <li><span class="check-icon">✓</span> High-Sensitivity hs-CRP Cardiac</li>
+              <li><span class="check-icon">✓</span> Free Doorstep Phlebotomy</li>
+            </ul>
+          </div>
+          <a href="404.html"><button class="btn-hero-primary" style="width: 100%; text-align: center;">
+            Book Cardio-Metabolic Plan
+          </button></a>
+        </div>
+
+        <!-- Package 3 -->
+        <div class="package-card reveal-on-scroll delay-3">
+          <div class="package-img-box">
+            <img src="images/service_genetic.webp" alt="Platinum Longevity DNA Health Package" loading="lazy">
+          </div>
+          <div>
+            <h3 class="package-name">Platinum Longevity & DNA</h3>
+            <p class="package-desc">Advanced multi-organ screening with genomic risk markers.</p>
+            <div class="package-price-row">
+              <span class="package-price">$299</span>
+              <span class="package-period">/ checkup</span>
+            </div>
+            <ul class="package-features-list">
+              <li><span class="check-icon">✓</span> 85+ Multi-System Parameters</li>
+              <li><span class="check-icon">✓</span> Cancer Biomarker Panel (PSA/CA)</li>
+              <li><span class="check-icon">✓</span> Hormonal & Adrenal Stress Index</li>
+              <li><span class="check-icon">✓</span> Pharmacogenomic Gene Screening</li>
+              <li><span class="check-icon">✓</span> 1-on-1 Pathologist Consultation</li>
+            </ul>
+          </div>
+          <a href="404.html"><button class="btn-book-visit" style="width: 100%; text-align: center;">
+            Book Platinum Plan
+          </button></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       SECTION 4: BOARD-CERTIFIED SPECIALISTS (WITH PORTRAITS)
+       ========================================================================== -->
+  <section class="specialists-section" id="specialists">
+    <div class="container">
+      <div class="section-head-center reveal-on-scroll">
+        <span class="section-badge-pill">Clinical Leadership</span>
+        <h2 class="section-title-large">Meet Our Board-Certified Pathologists</h2>
+        <p class="section-sub-text">
+          Our diagnostic laboratory is led by renowned pathologists, molecular geneticists, and clinical biochemists dedicated to precision medicine.
+        </p>
+      </div>
+
+      <div class="specialists-grid">
+        <div class="specialist-card reveal-on-scroll delay-1">
+          <div class="specialist-photo-wrap">
+            <img src="images/dr_elena_rostova_ext.webp" alt="Dr. Elena Rostova MD Pathologist" loading="lazy">
+          </div>
+          <h3 class="specialist-name">Dr. Elena Rostova, MD</h3>
+          <div class="specialist-role">Chief Clinical Pathologist</div>
+          <p class="specialist-creds">Johns Hopkins Medicine • 18+ Yrs</p>
+          <a href="404.html"><button class="service-card-link">
+            <span>Book Consult</span> →
+          </button></a>
+        </div>
+
+        <div class="specialist-card reveal-on-scroll delay-2">
+          <div class="specialist-photo-wrap">
+            <img src="images/dr_alistair_vance_ext.webp" alt="Dr. Alistair Vance PhD Genetics" loading="lazy">
+          </div>
+          <h3 class="specialist-name">Dr. Alistair Vance, PhD</h3>
+          <div class="specialist-role">Head of Molecular Genetics</div>
+          <p class="specialist-creds">Oxford University • 15+ Yrs</p>
+          <a href="404.html"><button class="service-card-link">
+            <span>Book Consult</span> →
+          </button></a>
+        </div>
+
+        <div class="specialist-card reveal-on-scroll delay-3">
+          <div class="specialist-photo-wrap">
+            <img src="images/dr_miriam_patel.WEBP" alt="Dr. Miriam Patel MD Endocrinology" loading="lazy">
+          </div>
+          <h3 class="specialist-name">Dr. Miriam Patel, MD</h3>
+          <div class="specialist-role">Endocrinology & Biochemistry</div>
+          <p class="specialist-creds">Stanford Health Care • 12+ Yrs</p>
+          <a href="404.html"><button class="service-card-link">
+            <span>Book Consult</span> →
+          </button></a>
+        </div>
+
+        <div class="specialist-card reveal-on-scroll delay-4">
+          <div class="specialist-photo-wrap">
+            <img src="images/dr_david_kim_ext.webp" alt="Dr. David Kim MD Cardiology" loading="lazy">
+          </div>
+          <h3 class="specialist-name">Dr. David Kim, MD</h3>
+          <div class="specialist-role">Cardiovascular Biomarkers</div>
+          <p class="specialist-creds">Harvard Medical • 14+ Yrs</p>
+          <a href="404.html"><button class="service-card-link">
+            <span>Book Consult</span> →
+          </button></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       SECTION 5: PATIENT REVIEWS (WITH AVATAR PHOTOS)
+       ========================================================================== -->
+  <section class="reviews-section" id="reviews">
+    <div class="container">
+      <div class="section-head-center reveal-on-scroll">
+        <span class="section-badge-pill">Verified Feedback</span>
+        <h2 class="section-title-large">Trusted by Over 7,400+ Patients</h2>
+        <p class="section-sub-text">
+          Read why patients and referring physicians choose STACKLY for accurate, stress-free clinical diagnostics.
+        </p>
+      </div>
+
+      <div class="reviews-tri-grid">
+        <div class="review-card reveal-on-scroll delay-1">
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text">
+            "The doorstep collection was incredibly smooth and painless. I got my complete thyroid and lipid profile results on my phone the very same afternoon!"
+          </p>
+          <div class="reviewer-meta">
+            <div class="reviewer-avatar-photo">
+              <img src="images/reviewer_claire.webp" alt="Claire Washington Verified Patient" loading="lazy">
+            </div>
+            <div>
+              <div class="reviewer-name">Claire Washington</div>
+              <div class="reviewer-sub">Verified Patient • Home Visit</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="review-card reveal-on-scroll delay-2">
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text">
+            "As a primary care physician, STACKLY's analytical turnaround time and precision molecular genetics have dramatically improved how quickly we tailor patient treatments."
+          </p>
+          <div class="reviewer-meta">
+            <div class="reviewer-avatar-photo">
+              <img src="images/reviewer_rodriguez.webp" alt="Dr. Michael Rodriguez Cardiologist" loading="lazy">
+            </div>
+            <div>
+              <div class="reviewer-name">Dr. Michael Rodriguez, MD</div>
+              <div class="reviewer-sub">Cardiologist • Healthcare Provider</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="review-card reveal-on-scroll delay-3">
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text">
+            "Clear, colorful range charts in the digital report made it so easy to understand my Vitamin D and metabolic levels without confusing medical jargon."
+          </p>
+          <div class="reviewer-meta">
+            <div class="reviewer-avatar-photo">
+              <img src="images/reviewer_jonathan.webp" alt="Jonathan Taylor Verified Patient" loading="lazy">
+            </div>
+            <div>
+              <div class="reviewer-name">Jonathan Taylor</div>
+              <div class="reviewer-sub">Verified Patient • Executive Package</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       COMPREHENSIVE MODERN FOOTER
+       ========================================================================== -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-top-grid">
+        <!-- Brand Info -->
+        <div>
+          <div class="footer-brand-title">
+            <img src="images/Logo.webp" alt="STACKLY Logo" class="brand-logo-img">
+          </div>
+          <p class="footer-brand-text">
+            Precision clinical diagnostics, high-throughput pathology, and molecular genomics delivering certified accuracy for clinicians and patients.
+          </p>
+          <div class="footer-accred-badges">
+            <span class="footer-pill">CAP Accredited</span>
+            <span class="footer-pill">ISO 15189:2022</span>
+            <span class="footer-pill">HIPAA Compliant</span>
+          </div>
+
+          <!-- Social Media Icons -->
+          <div class="footer-social-links">
+            <a href="404.html" class="footer-social-btn" aria-label="Facebook" title="Facebook">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+              </svg>
+            </a>
+            <a href="404.html" class="footer-social-btn" aria-label="Twitter" title="Twitter / X">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 4l11.733 16h4.267l-11.733 -16z"></path>
+                <path d="M4 20l6.768 -6.768m2.46 -2.46l6.772 -6.772"></path>
+              </svg>
+            </a>
+            <a href="404.html" class="footer-social-btn" aria-label="LinkedIn" title="LinkedIn">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                <rect x="2" y="9" width="4" height="12"></rect>
+                <circle cx="4" cy="4" r="2"></circle>
+              </svg>
+            </a>
+            <a href="404.html" class="footer-social-btn" aria-label="Instagram" title="Instagram">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+              </svg>
+            </a>
+            <a href="404.html" class="footer-social-btn" aria-label="YouTube" title="YouTube">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"></path>
+                <polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Quick Links -->
+        <div>
+          <h4 class="footer-heading">Diagnostic Services</h4>
+          <ul class="footer-links-list">
+            <li><a href="404.html" class="footer-link-item">General Diagnostic Testing</a></li>
+            <li><a href="404.html" class="footer-link-item">Specialized Genetic Testing</a></li>
+            <li><a href="404.html" class="footer-link-item">Hormone Insights Testing</a></li>
+            <li><a href="404.html" class="footer-link-item">Naturopathic Lab Testing</a></li>
+            <li><a href="404.html" class="footer-link-item">COVID19 Testing Solutions</a></li>
+          </ul>
+        </div>
+
+        <!-- Preventative Care -->
+        <div>
+          <h4 class="footer-heading">Patient Care</h4>
+          <ul class="footer-links-list">
+            <li><a href="404.html" class="footer-link-item" >Book Home Collection</a></li>
+            <li><a href="404.html" class="footer-link-item">Health Packages & Pricing</a></li>
+            <li><a href="404.html" class="footer-link-item">Consult Pathologists</a></li>
+            <li><a href="404.html" class="footer-link-item">Doctor Registration Portal</a></li>
+            <li><a href="404.html" class="footer-link-item">Fasting Guidelines</a></li>
+          </ul>
+        </div>
+
+        <!-- Contact Info -->
+        <div>
+          <h4 class="footer-heading">Central Diagnostic Hub</h4>
+          <div class="footer-contact-info">
+            <p>Salem, TamilNadu, India</p>
+            <p>24/7 Helpline: +91 98428 71840</p>
+            <p>support@stacklydiagnostics.com</p>
+            <p>Open 24/7 for Emergency Diagnostics</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom-strip">
+        <div>© 2026 STACKLY Precision Diagnostics Inc. All rights reserved.</div>
+        <div class="footer-legal-links">
+          <a href="404.html">Privacy Policy</a>
+          <a href="404.html">Terms of Service</a>
+          <a href="404.html">Security & HIPAA</a>
+          <a href="404.html">Quality Charter</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ==========================================================================
+       MODALS & SLIDERS (Interactive Functionality)
+       ========================================================================== -->
+
+  <!-- Booking Modal -->
+  <div id="bookingModal" class="modal-overlay">
+    <div class="modal-card">
+      <button class="modal-close-btn" onclick="closeBookingModal()">✕</button>
+      <h2 style="font-size: 1.5rem; font-weight: 800; margin-bottom: 0.5rem; color: var(--text-dark);">
+        Schedule Laboratory Appointment
+      </h2>
+      <p style="font-size: 0.9rem; color: var(--text-body); margin-bottom: 1.5rem;">
+        Book your in-clinic test or doorstep phlebotomy visit with STACKLY specialists.
+      </p>
+
+      <form id="appointmentForm" onsubmit="handleBookingSubmit(event)">
+        <div class="form-group">
+          <label class="form-label" for="bookingPatientName">Patient Full Name</label>
+          <input type="text" id="bookingPatientName" class="form-input" placeholder="e.g. Sarah Jenkins" required>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+          <div class="form-group">
+            <label class="form-label" for="bookingPhone">Phone Number</label>
+            <input type="tel" id="bookingPhone" class="form-input" placeholder="+1 (555) 234-5678" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="bookingDate">Preferred Date</label>
+            <input type="date" id="bookingDate" class="form-input" value="2026-09-01" required>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="bookingService">Select Testing Service or Package</label>
+          <select id="bookingService" class="form-select">
+            <option value="General Diagnostic Testing">General Diagnostic Testing</option>
+            <option value="Specialized Genetic Testing">Specialized Genetic Testing</option>
+            <option value="Naturopathic Lab Testing">Naturopathic Lab Testing</option>
+            <option value="Hormone Insights Testing">Hormone Insights Testing</option>
+            <option value="COVID19 Testing Solutions">COVID19 Testing Solutions</option>
+            <option value="Essential Wellness Package">Essential Wellness Package ($49)</option>
+            <option value="Cardio-Metabolic Pro Package">Cardio-Metabolic Pro Package ($129)</option>
+            <option value="Platinum Longevity Package">Platinum Longevity Package ($299)</option>
+          </select>
+        </div>
+
+        <button type="submit" class="btn-hero-primary" style="width: 100%; margin-top: 1rem;">
+          Confirm Booking
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Cart Drawer Overlay -->
+  <div id="cartDrawerOverlay" class="cart-drawer-overlay" onclick="closeCartDrawer()"></div>
+  <div id="cartDrawer" class="cart-drawer">
+    <div class="cart-drawer-header">
+      <h3 style="font-weight: 700; font-size: 1.2rem;">Your Test Cart</h3>
+      <button class="modal-close-btn" style="position: static;" onclick="closeCartDrawer()">✕</button>
+    </div>
+    <div id="cartItemsList" class="cart-items-list">
+      <div style="text-align: center; color: var(--text-body); padding: 3rem 1rem;">
+        Your cart is currently empty.
+      </div>
+    </div>
+    <div class="cart-drawer-footer">
+      <button class="btn-hero-primary" style="width: 100%;" onclick="closeCartDrawer(); openBookingModal();">
+        Proceed to Checkout
+      </button>
+    </div>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div id="toastContainer" class="toast-container"></div>
+
+  <!-- Core JavaScript -->
+  <script src="app.js"></script>
+</body>
+</html>
